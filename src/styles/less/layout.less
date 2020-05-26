@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+// 布局相关的:上下布局
+.ant-layout.codelieche {
+    height: 100vh;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+
+    // 头部：
+    .ant-layout-header {
+        height: 50px;
+    }
+
+    .ant-layout {
+        flex: 1;
+    }
+}
+
+.left-right-layout {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+
+    .ant-layout-content{
+        flex: 1;
+    }
+}
