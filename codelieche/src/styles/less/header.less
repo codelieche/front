@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+.body > .header {
+    background-color: @top-header-background;
+    color: #fff;
+
+    & > div {
+        width: 100%;
+        height: 50px;
+        overflow: hidden;
+    }
+
+    // 顶部左侧的logo
+    .logo {
+        display: inline-block;
+        img {
+            width: auto;
+            height: 30px;
+        }
+    }
+
+    ul.nav {
+        // display: inline-block;
+        float: right;
+        color: #F8F8F8;
+        font-size: 13px;
+        li {
+            display: inline-block;
+            padding: 0 10px;
+            min-width: 60px;
+            text-align: center;
+            a {
+                display: inline-block;
+                padding: 0 8px;
+                color: #F8F8F8;
+                text-decoration: none;
+            }
+            &:hover {
+                background-color: #4A5064;
+            }
+        }
+    }
+}

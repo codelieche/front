@@ -1,0 +1,151 @@
+// 左右布局左侧的样式
+
+// 左右布局
+.ant-layout.ant-layout-has-sider{
+
+    .ant-layout-sider {
+        background-color: @left-sider-background !important;
+        color: @left-sider-color;
+    }
+
+    .left-sider .ant-layout-sider-children{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        .header {
+            .title {
+                text-align: center;
+                font-size: 14px;
+                padding: 5px 0;
+                background: @left-sider-collapsed-toogle-background;
+                border-bottom: 1px solid @left-sider-background;
+            }
+            .collapsed-toogle {
+                padding: 2px 0;
+                color: @left-sider-nav-a-color;
+                text-align: center;
+                background: @left-sider-collapsed-toogle-background;
+                cursor: pointer;
+                i {
+                    line-height: 31px;
+                    font-size: 16px;
+                    font-weight: 300;
+                }
+            }
+        }
+        .content {
+            flex: 1;
+            text-overflow: auto;
+            padding-bottom: 20px;
+            overflow: hidden auto;
+            margin-right: 0px;
+            margin-bottom: 0;
+            .nav-list { // 左侧导航的列表
+                .item { // 菜单导航Item
+                    line-height: 40px;
+                    font-size: 14px;
+                    -webkit-user-select: none;
+                    cursor: pointer;
+                    position: relative;
+
+                    .title { // 功能菜单的标题
+                        overflow: hidden;
+                        text-overflow: ellipsis;  // 标题太长的时候截断
+                        white-space: nowrap;
+                        color: @left-sider-nav-a-color;
+                        // font-weight: 400;  // 标题不要加粗
+                        font-weight: 500;  // 标题加粗
+                        .no-title {
+                            display: inline-block;
+                        }
+                        i {  // 图标
+                            margin-right: 4px;
+                        }
+
+                        &:hover {  // 鼠标放上来的时候，让底纹醒目一下
+                            background-color: @letf-sider-nav-item-hover-color;
+                        }
+                    }
+
+                    .right {  // 当有children的菜单，它的右侧会有个标识
+                        position: absolute;
+                        right: 0px;
+                        top: 0px;
+                        padding: 0 5px;
+                        font-size: 10px;
+                        i {
+                            padding: 5px;
+                        }
+                    }
+
+                    a {  // 导航菜单的a链接
+                        color: @left-sider-nav-a-color;
+                        &.active {  // 当前选中的a连接
+                            .title {
+                                color: @left-sider-nav-active-color;
+                                background-color: @left-sider-nav-active-background;
+                            }
+                        }
+                    }
+                }
+                
+                // 每级缩进12px：代码里面控制padding-left: 12 x level;
+                .children {
+                    display: none;  // 最开始子菜单是不显示的，当是 .children.active的时候才显示
+                    // background-color: @left-sider-collapsed-toogle-background;
+                    &.active {
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .footer {
+            .title {
+                text-align: center;
+                font-size: 14px;
+                padding: 5px 0;
+                // background: @left-sider-collapsed-toogle-background;
+                border-bottom: 1px solid @left-sider-background;
+            }
+        }
+    }
+}
+
+// 左侧导航折叠导航样式
+.left-sider.collapsed {
+
+    .content {
+        .nav-list {  // 导航菜单列表
+            .item {
+                text-align: center;
+            }
+        }
+    }
+}
+
+// 修改默认的填充
+.ant-popover-inner-content {
+    padding: 0px 0;
+}
+
+.collapsed-nav-children {
+    .item {
+        &:hover {
+            background-color: @letf-sider-nav-item-hover-color;
+        }
+    }
+    .item + .item {
+        border-top: 1px solid #eee;
+    }
+    a {
+        display: block;
+        padding: 5px 10px;
+        line-height: 24px;
+        color: #565656;
+        .title {
+            line-height: 24px;
+        }
+    }
+}
+// 左侧导航折叠导航样式: End
