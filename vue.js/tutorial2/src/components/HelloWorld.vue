@@ -1,0 +1,33 @@
+<template>
+  <div class="hello">
+    <h1>{{ msg }}</h1>
+    <div class="content">
+        <div>{{body}}</div>
+    </div>
+    <div class="buttons">
+        <el-button type="primary" @click="callback">点击按钮</el-button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'HelloWorld',
+  props: {
+    msg: String,
+    callback: Function
+  },
+  data (){
+      return {
+          body: "主体内容"
+      }
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+    .content{
+        padding: 20px 10px;
+    }
+</style>
