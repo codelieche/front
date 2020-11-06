@@ -2,7 +2,7 @@ var routers = [
   // 前缀：/user/login/
   {
     path: '',
-    name: 'UserLoginHome',
+    name: 'UserLoginIndex',
     component: () => import('./home.vue')
   },
   {

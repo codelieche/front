@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/user">用户页面</router-link>
+      <router-link to="/tutorial">Tutorial</router-link>
     </div>
     <div class="center">
       <div class="logo">

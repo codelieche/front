@@ -12,7 +12,7 @@ var routes = [
   // 登录相关的页面
   {
     path: 'login',
-    name: 'UserLogin',
+    // name: 'UserLogin',
     component: () => import('@/views/user/login/index.vue'),
     children: userLoginRoutes
   },
@@ -20,7 +20,7 @@ var routes = [
   // 用户信息页面
   {
     path: 'info',
-    name: 'UserInfoIndex',
+    // name: 'UserInfoIndex',
     component: () => import('@/views/user/info/index.vue'),
     children: userInfoRoutes // 便于管理，子路由单独放一个文件
   }

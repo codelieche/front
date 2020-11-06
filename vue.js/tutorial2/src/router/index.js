@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // 引入子路曰
+import tutorialRoutes from '@/views/tutorial/routes.js'
 import userRoutes from '@/views/user/routes.js'
 
 Vue.use(VueRouter)
@@ -9,8 +10,16 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'HomeIndex',
+    // name: 'HomeIndex',
     component: () => import('@/views/home/index.vue')
+  },
+
+  // 学习demo相关的路由
+  {
+    path: '/tutorial',
+    // name: 'TutorialIndex',
+    component: () => import('@/views/tutorial/index.vue'),
+    children: tutorialRoutes
   },
 
   // {
@@ -24,11 +33,10 @@ const routes = [
   // },
   {
     path: '/user/',
-    name: 'UserPages',
+    // name: 'UserPages',
     component: () => import('@/views/user/index/index.vue'),
     children: userRoutes
-  },
-  
+  }
 ]
 
 const router = new VueRouter({
