@@ -6,8 +6,19 @@
 
 <style>
 body {
+  width: 100%;
+  scroll-behavior: smooth;
+  color: #595959;
+  font-size: 14px;
   padding: 0;
   margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

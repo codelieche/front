@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- 头部区域开始 -->
-    <slot name="header">
+    <slot name="header" v-if="showHeader">
       <!-- <div class="header">
         <h1>头部内容</h1>
       </div> -->
@@ -9,12 +9,12 @@
     <!-- 头部区域结束 -->
 
     <!-- 页面主体内容 -->
-    <slot name="main">
+    <slot name="main" v-if="showMain">
       <div class="main">
-        <slot name="left-sider">
-            <!-- 左侧内容 -->
+        <slot name="left-sider" v-if="showLeft">
+          <!-- 左侧内容 -->
         </slot>
-        <slot name="right">
+        <slot name="right" v-if="showRight">
           <router-view></router-view>
         </slot>
       </div>
@@ -22,10 +22,10 @@
     <!-- 页面主体内容结束 -->
 
     <!-- 底部内容 -->
-    <slot name="footer">
-      <div class="footer">
+    <slot name="footer" v-if="showFooter">
+      <!-- <div class="footer">
         <div>底部的内容</div>
-      </div>
+      </div> -->
     </slot>
     <!-- 底部内容结束 -->
   </div>
@@ -34,6 +34,28 @@
 <script>
 export default {
   name: 'BaseLayout',
+  props: {
+    showHeader: {
+      type: Boolean,
+      default: true,
+    },
+    showMain: {
+      type: Boolean,
+      default: true,
+    },
+    showLeft: {
+      type: Boolean,
+      default: false,
+    },
+    showRight: {
+      type: Boolean,
+      default: true,
+    },
+    showFooter: {
+      type: Boolean,
+      default: false,
+    },
+  },
 }
 </script>
 
@@ -55,18 +77,15 @@ export default {
     display: flex;
 
     .left-sider {
-        width: 200px;
-        height: 100%;
-        background-color: #eee;
+      // width: 200px;
+      height: 100%;
     }
-    .right {
-        flex: 1;
-        background-color: #fff;
-    };
-  }
 
-  //   .footer {
-  //     background-color: #f9f9f9;
-  //   }
+    .right,
+    .content {
+      flex: 1;
+      background-color: #fff;
+    }
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="nav">
     <router-link to="/user/login/001">登录001</router-link>
   </div>
 </template>

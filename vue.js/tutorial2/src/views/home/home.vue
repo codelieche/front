@@ -9,6 +9,9 @@
       <div class="logo">
         <img alt="Vue logo" src="@/assets/logo.png" />
       </div>
+      <div>
+        <span class="el-icon-user-solid"></span>
+      </div>
       <HelloWorld :msg="message" :callback="HelloWorldCallback" />
     </div>
   </div>
@@ -31,6 +34,7 @@ export default {
   methods: {
     HelloWorldCallback() {
       console.log('callback:')
+      console.log(this.$router);
       if (this.message.indexOf('Vue') >= 0) {
         this.message = '你好！Callback'
       } else {

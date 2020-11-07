@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 // 引入子路曰
 import tutorialRoutes from '@/views/tutorial/routes.js'
 import userRoutes from '@/views/user/routes.js'
+import userLoginRoutes from '@/views/user/login/routes.js'
 
 Vue.use(VueRouter)
 
@@ -11,7 +12,15 @@ const routes = [
   {
     path: '/',
     // name: 'HomeIndex',
-    component: () => import('@/views/home/index.vue')
+    component: () => import('@/views/home/index.vue'),
+    children: [
+      {
+        path: "",
+        namee: "HomePage",
+        component: () => import('@/views/home/home.vue')
+      }
+
+    ]
   },
 
   // 学习demo相关的路由
@@ -31,12 +40,22 @@ const routes = [
   //   component: () =>
   //     import(/* webpackChunkName: "about" */ '../views/About.vue')
   // },
+
+  // 记得把登录页的路由放前面
+  {
+    path: '/user/login',
+    // name: 'UserLoginPages',
+    component: () => import('@/views/user/login/index.vue'),
+    children: userLoginRoutes
+  },
+
   {
     path: '/user/',
     // name: 'UserPages',
     component: () => import('@/views/user/index/index.vue'),
     children: userRoutes
-  }
+  },
+  
 ]
 
 const router = new VueRouter({

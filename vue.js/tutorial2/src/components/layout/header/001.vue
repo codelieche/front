@@ -1,7 +1,7 @@
 <template>
   <div class="header">
-    <router-link to="/">
-      <div class="logo">
+    <router-link to="/" key="header-logo">
+      <div class="logo" >
         <img src="@/assets/logo.png" alt="codelieche" />
         <span> 编程教程 </span>
       </div>
@@ -9,6 +9,9 @@
 
     <div class="nav">
       <ul>
+        <li>
+          <router-link to="/">首页</router-link>
+        </li>
         <li>
           <router-link to="/user">用户</router-link>
         </li>
