@@ -1,4 +1,5 @@
 <template>
+  <!-- 这个采用kanban系统后端的菜单url -->
   <div class="left-sider" :class="{ collapsed: collapsed }" key="left-sider">
     <div class="header" @click="handleCollapseedToogle">
       <div class="collapsed-toogle">
@@ -19,17 +20,15 @@
 </template>
 
 <script>
-import navData from '../nav/NavData.js'
+// import navData from '../nav/NavData.js'
 import LeftNavItem from '../nav/leftNav'
 
 export default {
   name: 'LeftSider001',
   props: {
-    items: {
-      type: Array,
-      default() {
-        return navData
-      },
+    url: {
+      type: String,
+      default: '/api/v1/account/user/nav/list',
     },
   },
   components: {
@@ -39,13 +38,33 @@ export default {
   // 数据
   data() {
     return {
-      // items: navData,
+      items: [],
       collapsed: false,
     }
+  },
+  mounted() {
+    console.log('mounted')
+    this.fetchNavData()
   },
   methods: {
     handleCollapseedToogle() {
       this.collapsed = !this.collapsed
+    },
+    fetchNavData() {
+      // url默认是：/api/v1/account/user/nav/list
+      this.$http
+        .get(this.url)
+        .then((response) => response.data)
+        .then((data) => {
+          if (data instanceof Array) {
+            this.items = data
+          } else {
+            // 获取默认的导航数据有误
+            if (data.results instanceof Array) {
+              this.items = data.results
+            }
+          }
+        })
     },
   },
 }

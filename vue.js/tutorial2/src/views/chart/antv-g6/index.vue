@@ -4,6 +4,6 @@
 
 <script>
 export default {
-    name: "UserGroupIndex"
+    name: "SlotIndex"
 }
-</script> 
+</script>

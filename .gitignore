@@ -30,3 +30,7 @@ src/styles/less/*.css
 src/styles/main.css
 *.css.map
 
+yarn.lock
+package.lock
+
+

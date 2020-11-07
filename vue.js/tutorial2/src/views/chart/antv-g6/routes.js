@@ -1,7 +1,7 @@
 var routes = [
     {
         path: "",
-        name: "SlotHome",
+        name: "AntvHome",
         component: () => import("./home.vue")
     },
     // {
@@ -9,14 +9,9 @@ var routes = [
     //     name: "Slot001Page",
     //     component: () => import("./001.vue")
     // },
-    // {
-    //     path: "002",
-    //     name: "Slot002Page",
-    //     component: () => import("./002.vue")
-    // }
 ]
 
-var subComponents = ['001', '002', '003']
+var subComponents = ['001', '002', '003', 'customNode/001']
 
 subComponents.forEach(item => {
     routes.push({

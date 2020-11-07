@@ -67,24 +67,24 @@ export default {
   display: flex;
   flex-direction: column;
 
-  //   .header {
-  //     color: #f9f9f9;
-  //   }
-
   .main {
-    flex: 1;
+    flex: 1 1;
     background: #fff;
     display: flex;
+    // overflow: scroll;
+    overflow: auto;
 
     .left-sider {
       // width: 200px;
       height: 100%;
+      overflow: auto;
     }
 
     .right,
     .content {
       flex: 1;
       background-color: #fff;
+      overflow: auto;
     }
   }
 }
