@@ -33,11 +33,13 @@
   background-color: #333744;
   height: @HeaderHight;
   text-align: left;
+  display: flex;
   .logo,
   .nav {
     display: inline-block;
   }
   .logo {
+    width: 160px;
     // float: left;
     height: @HeaderHight;
     // padding: 10px;
@@ -64,8 +66,13 @@
       font-weight: 500;
     }
   }
+
+  // 右侧的导航
   .nav {
-    float: right;
+    flex: 1;
+    // float: right;
+    text-align: right;
+    overflow: hidden;
     color: #f9f9f9;
     height: @HeaderHight;
     overflow: hidden;
@@ -92,6 +99,7 @@
         a {
           min-width: 60px;
           padding: 0 10px;
+          font-size: 15px;
           color: #f8f8f8;
           display: inline-block;
           height: @HeaderHight;

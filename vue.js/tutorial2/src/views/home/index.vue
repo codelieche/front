@@ -60,3 +60,8 @@ export default {
   },
 }
 </script>
+<style lang="less">
+body {
+  height: 100vh;
+}
+</style>

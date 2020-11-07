@@ -5,6 +5,7 @@ import {
     Input, Radio, Checkbox,
     Select, 
     Message,
+    Popover, Tooltip,
 } from 'element-ui';
 
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 2 };
@@ -15,6 +16,8 @@ Vue.use(Input)
 Vue.use(Radio)
 Vue.use(Checkbox)
 Vue.use(Select)
+Vue.use(Popover)
+Vue.use(Tooltip)
 
 Vue.prototype.$message = Message
 

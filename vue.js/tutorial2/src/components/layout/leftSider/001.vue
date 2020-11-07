@@ -1,8 +1,8 @@
 <template>
-  <div class="left-sider" :class="{ collapsed: collapsed }"  key="left-sider">
+  <div class="left-sider" :class="{ collapsed: collapsed }" key="left-sider">
     <div class="header" @click="handleCollapseedToogle">
       <div class="collapsed-toogle">
-          <span :class="collapsed ? 'el-icon-s-unfold' : 'el-icon-s-fold'"></span>
+        <span :class="collapsed ? 'el-icon-s-unfold' : 'el-icon-s-fold'"></span>
       </div>
     </div>
     <div class="content">
@@ -49,11 +49,13 @@ export default {
 @left-sider-collapsed-toogle-background: #4a5064;
 
 .left-sider {
+  overflow: auto;
   width: 200px;
   &.collapsed {
     width: 65px;
   }
   height: 100%;
+  max-height: 100%;
   background: @left-sider-backgroud;
   color: #f8f8f8;
   display: flex;
@@ -67,9 +69,9 @@ export default {
       line-height: 35px;
       cursor: pointer;
       span {
-          font-size: 20px;
-          font-weight: normal;
-          line-height: 35px;
+        font-size: 20px;
+        font-weight: normal;
+        line-height: 35px;
       }
     }
   }
@@ -77,9 +79,26 @@ export default {
   // 左侧导航的主体内容
   .content {
     flex: 1;
-    .nav-list {
-      
-    }
+    // 当导航超过高度的时候，这里滑动
+    overflow: hidden auto;
   }
+}
+
+// 默认的滑块样式
+::-webkit-scrollbar {
+    // width: 8px;
+    // height: 8px;
+    width: 0px;
+    height: 0px;
+}
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    // background: @left-sider-collapsed-toogle-background;
+    background: rgba(255, 255, 255, 0.1);
+    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.8); 
 }
 </style>

@@ -1,7 +1,47 @@
 <template>
   <!-- 文本注释 -->
-  <div class="item">
-    <div class="title" @click="onTitleClick">
+  <div class="item" :class="{ collapsed: collapsed }">
+    <div v-if="collapsed" class="title" @click="onTitleClick">
+      <!-- 折叠的情况 -->
+      <el-tooltip effect="dark" :content="item.title" placement="right">
+        <span v-if="item.is_link && item.link">
+          <!-- 是a连接 -->
+          <a
+            :href="item.link"
+            :target="item.target === '_blank' ? '_blank' : ''"
+            :style="{ paddingLeft: paddingLeftValue }"
+          >
+            <!-- 左侧显示icon -->
+            <span
+              class="icon"
+              :class="item.icon ? item.icon : 'el-icon-arrow-right'"
+            ></span>
+          </a>
+        </span>
+
+        <!-- 跳转内部Url的情况 -->
+        <router-link
+          v-else-if="!!item.slug"
+          :to="item.slug"
+          :style="{ paddingLeft: paddingLeftValue }"
+        >
+          <span
+            class="icon"
+            :class="item.icon ? item.icon : 'el-icon-arrow-right'"
+          ></span>
+        </router-link>
+
+        <span
+          v-else
+          class="icon"
+          :class="item.icon ? item.icon : 'el-icon-arrow-right'"
+        ></span>
+      </el-tooltip>
+      <!-- 折叠情况结束 -->
+    </div>
+
+    <div class="title" @click="onTitleClick" v-else>
+      <!-- 非折叠的情况 -->
       <!-- 判断是不是外链 -->
       <span v-if="item.is_link && item.link">
         <!-- 是a连接 -->
@@ -31,7 +71,7 @@
         ></span>
         {{ item.title }}
       </router-link>
-    
+
       <span v-else>
         <!-- 不是a连接 -->
         <span
@@ -55,6 +95,7 @@
         v-for="(subItem, subIndex) in item.children"
         :item="subItem"
         :key="subIndex"
+        :collapsed="collapsed"
       >
       </NavItem>
     </div>
@@ -80,7 +121,11 @@ export default {
       return Array.isArray(this.item.children) && this.item.children.length > 0
     },
     paddingLeftValue() {
-      return `${this.item.level * 10}px`
+      if (this.collapsed) {
+        return 0
+      } else {
+        return `${this.item.level * 10}px`
+      }
     },
   },
   methods: {
@@ -96,6 +141,27 @@ export default {
 // 当行Item的标题鼠标悬放时候的背景色
 @nav-tiem-title-hove-backgroud: rgba(112, 119, 143, 0.16);
 @nav-item-active-background: #1890ff;
+
+.item {
+  &.collapsed {
+    position: relative;
+     .title {
+      width: 100%;
+     .icon {
+        width: 65px;
+        text-align: center;
+      }
+    }
+     .children {
+    //   position: absolute;
+    //   left: 70px;
+    //   top: 0;
+    //   background-color: #3f3f3f;
+      border-top: 4px sold red;
+    }
+  }
+}
+
 .item {
   position: relative;
   .title {
@@ -117,7 +183,7 @@ export default {
       position: absolute;
       right: 8px;
       span {
-        font-size: 14px;
+        font-size: 10px;
         line-height: 35px;
       }
     }
