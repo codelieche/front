@@ -111,20 +111,26 @@ export default {
     item: Object, // 导航数据对象
     index: Number, // 序号
     collapsed: Boolean, // 是否是折叠的
-    openParentChildren: Function,
+    openParentChildren: {
+      type: Function,
+      default(){
+        return null
+      }
+    },
   },
-  mounted(){
+  mounted() {
     // if(window.location.href.indexOf(this.item.slug) > 0){
     //   this.openParentChildren();
     // }
-    if(this.$route.path.indexOf(this.item.slug) >= 0){
-      this.openParentChildren();
+    if (this.$route.path.indexOf(this.item.slug) >= 0) {
+      if (this.openParentChildren != null) {
+        this.openParentChildren()
+      }
     }
   },
   data() {
     return {
       openChildren: false, // 是否打开子菜单
-
     }
   },
   computed: {
@@ -144,11 +150,11 @@ export default {
       // 取反
       this.openChildren = !this.openChildren
     },
-    openChildrenFunc(){
+    openChildrenFunc() {
       // console.log("opeChildrenFunc", data)
       // console.log(this.$route)
       this.openChildren = true
-    }
+    },
   },
 }
 </script>
@@ -161,18 +167,18 @@ export default {
 .item {
   &.collapsed {
     position: relative;
-     .title {
+    .title {
       width: 100%;
-     .icon {
+      .icon {
         width: 65px;
         text-align: center;
       }
     }
-     .children {
-    //   position: absolute;
-    //   left: 70px;
-    //   top: 0;
-    //   background-color: #3f3f3f;
+    .children {
+      //   position: absolute;
+      //   left: 70px;
+      //   top: 0;
+      //   background-color: #3f3f3f;
       border-top: 4px sold red;
     }
   }

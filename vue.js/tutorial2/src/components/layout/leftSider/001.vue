@@ -24,6 +24,14 @@ import LeftNavItem from '../nav/leftNav'
 
 export default {
   name: 'LeftSider001',
+  props: {
+    items: {
+      type: Array,
+      default() {
+        return navData
+      },
+    },
+  },
   components: {
     LeftNavItem,
   },
@@ -31,7 +39,7 @@ export default {
   // 数据
   data() {
     return {
-      items: navData,
+      // items: navData,
       collapsed: false,
     }
   },
@@ -86,19 +94,19 @@ export default {
 
 // 默认的滑块样式
 ::-webkit-scrollbar {
-    // width: 8px;
-    // height: 8px;
-    width: 0px;
-    height: 0px;
+  // width: 8px;
+  // height: 8px;
+  width: 0px;
+  height: 0px;
 }
 ::-webkit-scrollbar-track {
-    border-radius: 10px;
-    // background: @left-sider-collapsed-toogle-background;
-    background: rgba(255, 255, 255, 0.1);
-    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  // background: @left-sider-collapsed-toogle-background;
+  background: rgba(255, 255, 255, 0.1);
+  // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
 }
 ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.8); 
+  border-radius: 10px;
+  // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.8);
 }
 </style>

@@ -14,7 +14,13 @@ var routes = [
     // name: "SlotIndex",
     component: () => import("./slot/index.vue"),
     children: slotRoutes
-  }
+  },
+  // {
+  //   path: 'slot/:path',
+  //   component(){
+  //     return import('./slot/002')
+  //   }
+  // }
 ]
 
 export default routes

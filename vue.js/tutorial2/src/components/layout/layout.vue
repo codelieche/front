@@ -71,7 +71,8 @@ export default {
     flex: 1 1;
     background: #fff;
     display: flex;
-    overflow: scroll;
+    // overflow: scroll;
+    overflow: auto;
 
     .left-sider {
       // width: 200px;
@@ -83,6 +84,7 @@ export default {
     .content {
       flex: 1;
       background-color: #fff;
+      overflow: auto;
     }
   }
 }

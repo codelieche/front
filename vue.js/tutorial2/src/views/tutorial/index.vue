@@ -9,10 +9,11 @@
 
     <!-- 左侧内容 -->
     <template v-slot:left-sider>
-      <div class="left-sider" style="width: 200px">index left sider</div>
+      <!-- <div class="left-sider" style="width: 200px">index left sider</div> -->
+      <LeftSide001 :items="items"></LeftSide001>
     </template>
 
-     <!-- 主体内容 -->
+    <!-- 主体内容 -->
     <template v-slot:right>
       <!-- <keep-alive> -->
       <div class="content">
@@ -21,24 +22,31 @@
       <!-- </keep-alive> -->
     </template>
 
-    <!-- 底部内容 -->
-    <template v-slot:footer>
-      <Footer001></Footer001>
-    </template>
   </base-layout>
 </template>
 
 <script>
 import BaseLayout from '@/components/layout/layout.vue'
 import Header001 from '@/components/layout/header/001.vue'
-import Footer001 from '@/components/layout/footer/001.vue'
+import LeftSide001 from '@/components/layout/leftSider/001.vue'
+// import Footer001 from '@/components/layout/footer/001.vue'
+import navData from './navData'
 
 export default {
   name: 'TutorialIndex',
   components: {
     BaseLayout,
     Header001,
-    Footer001,
+    LeftSide001,
+    // Footer001,
+  },
+  props: {
+    items: {
+      type: Array,
+      default(){
+        return navData
+        }
+    },
   },
   data() {
     return {
