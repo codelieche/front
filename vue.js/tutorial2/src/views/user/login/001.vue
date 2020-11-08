@@ -83,8 +83,10 @@ export default {
         if (validated) {
           // 2. 发起登录操作
           // console.log(this.$http);
-          var loginUrl = 'https://kanban.codelieche.com/api/v1/account/login'
+          // var loginUrl = 'https://kanban.codelieche.com/api/v1/account/login'
+          var loginUrl = '/api/v1/account/login'
           var response = await this.$http.post(loginUrl, this.loginForm)
+          // print(response)
 
           // 3. 对结果进行校验
           if (response.status == 200) {

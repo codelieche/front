@@ -12,7 +12,7 @@ export default {
   methods: {
     handleLogout() {
       window.sessionStorage.removeItem('isLogined')
-      this.$router.push('/user/login')
+      this.$router.push('/user/logout')
     },
   },
 }

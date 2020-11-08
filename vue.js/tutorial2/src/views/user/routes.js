@@ -46,6 +46,10 @@ var routes = [
     path: 'menu',
     component: () => import('@/views/user/menu/index.vue'),
     children: useMenuRoutes // 便于管理，子路由单独放一个文件
+  },
+  {
+    path: 'logout',
+    component: () => import('@/views/user/logout.vue'),
   }
 ]
 

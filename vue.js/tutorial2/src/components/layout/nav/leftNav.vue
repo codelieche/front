@@ -96,6 +96,7 @@
         :item="subItem"
         :key="subIndex"
         :collapsed="collapsed"
+        :openParentChildren="openChildrenFunc"
       >
       </NavItem>
     </div>
@@ -110,10 +111,20 @@ export default {
     item: Object, // 导航数据对象
     index: Number, // 序号
     collapsed: Boolean, // 是否是折叠的
+    openParentChildren: Function,
+  },
+  mounted(){
+    // if(window.location.href.indexOf(this.item.slug) > 0){
+    //   this.openParentChildren();
+    // }
+    if(this.$route.path.indexOf(this.item.slug) >= 0){
+      this.openParentChildren();
+    }
   },
   data() {
     return {
       openChildren: false, // 是否打开子菜单
+
     }
   },
   computed: {
@@ -133,6 +144,11 @@ export default {
       // 取反
       this.openChildren = !this.openChildren
     },
+    openChildrenFunc(){
+      // console.log("opeChildrenFunc", data)
+      // console.log(this.$route)
+      this.openChildren = true
+    }
   },
 }
 </script>
