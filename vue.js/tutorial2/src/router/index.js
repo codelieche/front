@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import tutorialRoutes from '@/views/tutorial/routes.js'
 import userRoutes from '@/views/user/routes.js'
 import userLoginRoutes from '@/views/user/login/routes.js'
+import chartRoutes from '@/views/chart/routes.js' 
 
 Vue.use(VueRouter)
 
@@ -55,6 +56,12 @@ const routes = [
     component: () => import('@/views/user/index/index.vue'),
     children: userRoutes
   },
+  // 图表相关的路由
+  {
+    path: '/chart/',
+    component: () => import('@/views/chart/index.vue'),
+    children: chartRoutes
+  }
   
 ]
 

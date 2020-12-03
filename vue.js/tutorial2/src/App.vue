@@ -20,6 +20,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -40,5 +41,10 @@ body {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.full {
+  width: 100%;
+  height: 100%;
 }
 </style>

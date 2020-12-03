@@ -1,5 +1,6 @@
 import Vue from "vue"
 import { 
+    Container, Header, Aside, Main,
     Button,
     Form, FormItem,
     Input, Radio, Checkbox,
@@ -9,6 +10,10 @@ import {
 } from 'element-ui';
 
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 2 };
+Vue.use(Container)
+Vue.use(Header)
+Vue.use(Aside)
+Vue.use(Main)
 Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)

@@ -1,6 +1,8 @@
 <template>
   <div class="main">
-    你好
+    <iframe src="http://127.0.0.1:3030/">
+
+    </iframe>
   </div>
 </template>
 
@@ -14,3 +16,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .main {
+    height: 100%;
+  }
+ 
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+</style>

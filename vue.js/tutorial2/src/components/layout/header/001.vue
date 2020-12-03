@@ -18,6 +18,9 @@
         <li>
           <router-link to="/tutorial">Tutorial</router-link>
         </li>
+         <li>
+          <router-link to="/chart">图表</router-link>
+        </li>
         <li>
           <router-link to="/tutorial/slot">Slot</router-link>
         </li>
