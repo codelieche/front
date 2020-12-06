@@ -141,7 +141,7 @@ export default {
 
         layout: {
           name: 'grid', // cose, breadthfirst
-          columns: 6,
+          columns: 4,
         },
       }))
       // cy不可放入data中，要不它不断的变化，页面就卡主了

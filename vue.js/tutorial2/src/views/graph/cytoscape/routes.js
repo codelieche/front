@@ -11,7 +11,7 @@ var routes = [
     // },
 ]
 
-var subComponents = ['base/001', 'base/002', 'base/003', 'base/004']
+var subComponents = ['base/001', 'base/002', 'base/003', 'base/004', 'base/005']
 
 subComponents.forEach(item => {
     routes.push({
