@@ -44,7 +44,7 @@ export default {
 
   data() {
     return {
-      count: 20,
+      count: 50,
       nodes: [],
       edges: [],
     }
@@ -62,10 +62,22 @@ export default {
       const container = document.getElementById('container')
       const width = container.scrollWidth
       const height = container.scrollHeight || 500
+
+      // 计算画布大小
+      var zoomSize = 1
+      var itemSize = 200 * 200 // 每个节点需要的面积
+      zoomSize = (width * height) / (itemSize * this.count) // 计算div的面积 与 需要的面积的比
+      if(zoomSize > 1){
+          zoomSize = 1
+      }
+      if(zoomSize < 0.1){
+          zoomSize = 0.1
+      }
+
       const graph = new G6.Graph({
         container: 'container',
-        width,
-        height,
+        width: width * ( 1 / zoomSize),
+        height: height * ( 1 / zoomSize),
         layout: {
           type: 'grid',
           begin: [0, 0], // 可选，
@@ -121,6 +133,10 @@ export default {
 
       graph.data({ nodes: this.nodes, edges: this.edges })
       graph.render()
+      //   window.graph = graph
+      console.log("zoomSize", zoomSize);
+      console.log(width * (0.5 / zoomSize) , height * (0.5 / zoomSize))
+      graph.zoomTo(zoomSize)
 
       if (typeof window !== 'undefined')
         window.onresize = () => {
@@ -141,7 +157,7 @@ export default {
             namespace: 'default',
           },
           id: 'devops-xxxx-' + i,
-          type: 'custom-pod',
+          type: this.count > 200 ? "circle": 'custom-pod',
           //   type: 'circle',
         })
       }

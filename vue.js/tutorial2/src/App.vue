@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style>
+<style lang="less">
 body {
   width: 100%;
   scroll-behavior: smooth;
@@ -46,5 +46,9 @@ body {
 .full {
   width: 100%;
   height: 100%;
+
+  canvas {
+    left: 0;
+  }
 }
 </style>

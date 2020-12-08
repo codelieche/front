@@ -6,6 +6,7 @@ import tutorialRoutes from '@/views/tutorial/routes.js'
 import userRoutes from '@/views/user/routes.js'
 import userLoginRoutes from '@/views/user/login/routes.js'
 import chartRoutes from '@/views/chart/routes.js' 
+import graphRoutes from '@/views/graph/routes.js'
 
 Vue.use(VueRouter)
 
@@ -61,6 +62,11 @@ const routes = [
     path: '/chart/',
     component: () => import('@/views/chart/index.vue'),
     children: chartRoutes
+  },
+  {
+    path: '/graph/',
+    component: () => import('@/views/graph/index.vue'),
+    children: graphRoutes
   }
   
 ]
