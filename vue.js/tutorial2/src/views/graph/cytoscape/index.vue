@@ -4,6 +4,6 @@
 
 <script>
 export default {
-    name: "CytoscapeIndex"
+    name: "CytoscapeIndex",
 }
 </script>

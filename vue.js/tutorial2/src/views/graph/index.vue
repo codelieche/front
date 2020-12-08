@@ -44,6 +44,12 @@ export default {
         }
     },
   },
+  mounted() {
+    this.$store.commit('updateHeaderSlug', '/graph')
+  },
+  beforeDestroy() {
+    this.$store.commit('updateHeaderSlug', '/')
+  },
   data() {
     return {
       // 采用一个通用的布局，然后传参来显示各个区域

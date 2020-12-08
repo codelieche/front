@@ -10,27 +10,38 @@
     <div class="nav">
       <ul>
         <li>
-          <router-link to="/">首页</router-link>
+          <router-link to="/" :class="{ 'router-link-exact-active': '/' === this.$store.state.headerSlug}">首页</router-link>
         </li>
         <li>
-          <router-link to="/user">用户</router-link>
+          <router-link to="/user" :class="{ 'router-link-exact-active': '/user' === this.$store.state.headerSlug}">用户</router-link>
         </li>
         <li>
-          <router-link to="/tutorial">Tutorial</router-link>
+          <router-link to="/tutorial" :class="{ 'router-link-exact-active': '/tutorial' === this.$store.state.headerSlug}">Tutorial</router-link>
         </li>
          <li>
-          <router-link to="/chart">图表</router-link>
+          <router-link to="/chart" :class="{ 'router-link-exact-active': '/chart' === this.$store.state.headerSlug}">图表</router-link>
         </li>
          <li>
-          <router-link to="/graph">网络图</router-link>
+          <router-link to="/graph" :class="{ 'router-link-exact-active': '/graph' === this.$store.state.headerSlug}">网络图</router-link>
         </li>
         <li>
-          <router-link to="/tutorial/slot">Slot</router-link>
+          <router-link to="/tutorial/slot" >Slot</router-link>
         </li>
       </ul>
     </div>
   </div>
 </template>
+
+<script>
+// import { mapState } from 'vuex';
+
+export default {
+  name: "Header001",
+  // computed: {
+  //   ...mapState(["headerSlug"]),
+  // }
+}
+</script>
 
 <style lang="less" scoped>
 @HeaderHight: 50px;

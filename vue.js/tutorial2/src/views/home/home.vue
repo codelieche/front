@@ -26,6 +26,9 @@ export default {
   components: {
     HelloWorld,
   },
+  mounted() {
+    this.$store.commit('updateHeaderSlug', '/')
+  },
   data() {
     return {
       message: '你好！Vue.js',

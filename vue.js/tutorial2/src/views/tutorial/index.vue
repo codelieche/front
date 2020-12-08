@@ -21,7 +21,6 @@
       </div>
       <!-- </keep-alive> -->
     </template>
-
   </base-layout>
 </template>
 
@@ -43,10 +42,16 @@ export default {
   props: {
     items: {
       type: Array,
-      default(){
+      default() {
         return navData
-        }
+      },
     },
+  },
+  mounted() {
+    this.$store.commit('updateHeaderSlug', '/tutorial')
+  },
+  beforeDestroy() {
+    this.$store.commit('updateHeaderSlug', '/')
   },
   data() {
     return {
