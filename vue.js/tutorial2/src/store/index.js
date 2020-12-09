@@ -19,8 +19,8 @@ export default new Vuex.Store({
     headerSlug: '/',
 
     // 示例项目Todos的数据
-    todoItems: {}, // 对象的字段有：id, title, content, finished,
-    todoNextID: 0
+    todoItems: [], // 对象的字段有：id, title, content, finished,
+    todoNextID: 1
   },
 
   // Mutation用于变更Store中的数据：
@@ -45,6 +45,13 @@ export default new Vuex.Store({
     // 示例项目Todos相关的方法
     initTodoItems(state, todoItems) {
       state.todoItems = todoItems
+
+      for(var key in todoItems){
+        key = parseInt(key, 10)
+        if(key >= state.todoNextID){
+          state.todoNextID = key + 1
+        }
+      }
     },
     // 添加或者更新Todo对象
     addOrUpdateTodoItem(state, obj) {
@@ -59,13 +66,52 @@ export default new Vuex.Store({
       // 判断ID：没有传递ID就使用全局的
       if (!obj.id) {
         obj.id = state.todoNextID
-        state.todoNextID++
+        state.todoNextID += 1
       }
-      state.todoItems[obj.id] = obj
+
+      // 遍历：性能不优，测试项目
+      var isUpdate = false
+      state.todoItems.forEach((item, index) => {
+        if(item.id.toString() === obj.id.toString()){
+          state.todoItems[index] = obj
+          isUpdate = true
+          return
+        }
+      })
+
+      // 新添加的
+      if(!isUpdate){
+        state.todoItems.push(obj)
+      }
+
+      // state.todoItems[obj.id] = obj
+
+      // 把todoItems保存一下
+      localStorage.setItem(
+        'todoItems',
+        JSON.stringify(state.todoItems)
+      )
     },
     // 删除Todo对象
     removeTodoItem(state, id) {
-      delete state.todoItems[id]
+      // delete state.todoItems[id]
+      // state.todoItems = {
+      //   ...state.todoItems
+      // }
+
+       // 遍历：性能不优，测试项目
+       state.todoItems.forEach((item) => {
+        if(item.id.toString() === id.toString()){
+          state.todoItems.pop(item)
+          return
+        }
+      })
+
+      // 把todoItems保存一下
+      localStorage.setItem(
+        'todoItems',
+        JSON.stringify(state.todoItems)
+      )
     }
   },
 
@@ -92,6 +138,7 @@ export default new Vuex.Store({
     //       ...mapGetters(['hello'])
     hello(state) {
       return '你好：' + state.currentUser
-    }
+    },
+
   }
 })

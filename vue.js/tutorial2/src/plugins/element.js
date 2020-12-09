@@ -7,6 +7,9 @@ import {
     Select, 
     Message,
     Popover, Tooltip,
+    Card, Divider,
+    Table, TableColumn, Tag,
+    Switch
 } from 'element-ui';
 
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 2 };
@@ -23,6 +26,12 @@ Vue.use(Checkbox)
 Vue.use(Select)
 Vue.use(Popover)
 Vue.use(Tooltip)
+Vue.use(Card)
+Vue.use(Divider)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Tag)
+Vue.use(Switch)
 
 Vue.prototype.$message = Message
 

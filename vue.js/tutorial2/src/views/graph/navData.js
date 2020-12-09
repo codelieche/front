@@ -22,6 +22,10 @@ const navData = [
         slug: 'base/004',
         title: '箭头类型'
       },
+      {
+        slug: 'base/005',
+        title: '添加classes'
+      },
       
     ].map(item => {
       return {
