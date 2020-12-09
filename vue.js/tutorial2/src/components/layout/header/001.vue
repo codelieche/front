@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <router-link to="/" key="header-logo">
-      <div class="logo" >
+      <div class="logo">
         <img src="@/assets/logo.png" alt="codelieche" />
         <span> 编程教程 </span>
       </div>
@@ -9,23 +9,13 @@
 
     <div class="nav">
       <ul>
-        <li>
-          <router-link to="/" :class="{ 'router-link-exact-active': '/' === this.$store.state.headerSlug}">首页</router-link>
-        </li>
-        <li>
-          <router-link to="/user" :class="{ 'router-link-exact-active': '/user' === this.$store.state.headerSlug}">用户</router-link>
-        </li>
-        <li>
-          <router-link to="/tutorial" :class="{ 'router-link-exact-active': '/tutorial' === this.$store.state.headerSlug}">Tutorial</router-link>
-        </li>
-         <li>
-          <router-link to="/chart" :class="{ 'router-link-exact-active': '/chart' === this.$store.state.headerSlug}">图表</router-link>
-        </li>
-         <li>
-          <router-link to="/graph" :class="{ 'router-link-exact-active': '/graph' === this.$store.state.headerSlug}">网络图</router-link>
-        </li>
-        <li>
-          <router-link to="/tutorial/slot" >Slot</router-link>
+        <li v-for="(item, index) in navs" :key="index">
+          <router-link
+            :to="item.slug"
+            :class="{
+              'router-link-exact-active': item.slug === headerSlug,
+            }"
+            >{{ item.title }}</router-link>
         </li>
       </ul>
     </div>
@@ -33,13 +23,25 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 
 export default {
-  name: "Header001",
-  // computed: {
-  //   ...mapState(["headerSlug"]),
-  // }
+  name: 'Header001',
+  computed: {
+    ...mapState(['headerSlug']),
+  },
+  data() {
+    return {
+      navs: [
+        { slug: '/', title: '首页' },
+        { slug: '/tutorial', title: 'Tutorial' },
+        { slug: '/chart', title: '图标' },
+        { slug: '/graph', title: '网络图' },
+        { slug: '/project', title: '项目' },
+        { slug: '/user', title: '用户' },
+      ],
+    }
+  },
 }
 </script>
 

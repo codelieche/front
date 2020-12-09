@@ -5,8 +5,9 @@ import VueRouter from 'vue-router'
 import tutorialRoutes from '@/views/tutorial/routes.js'
 import userRoutes from '@/views/user/routes.js'
 import userLoginRoutes from '@/views/user/login/routes.js'
-import chartRoutes from '@/views/chart/routes.js' 
+import chartRoutes from '@/views/chart/routes.js'
 import graphRoutes from '@/views/graph/routes.js'
+import projectRoutes from '@/views/projects/routes.js'
 
 Vue.use(VueRouter)
 
@@ -17,11 +18,10 @@ const routes = [
     component: () => import('@/views/home/index.vue'),
     children: [
       {
-        path: "",
-        namee: "HomePage",
+        path: '',
+        namee: 'HomePage',
         component: () => import('@/views/home/home.vue')
       }
-
     ]
   },
 
@@ -67,8 +67,12 @@ const routes = [
     path: '/graph/',
     component: () => import('@/views/graph/index.vue'),
     children: graphRoutes
+  },
+  {
+    path: '/project/',
+    component: () => import('@/views/projects/index.vue'),
+    children: projectRoutes
   }
-  
 ]
 
 const router = new VueRouter({

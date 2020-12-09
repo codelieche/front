@@ -16,7 +16,11 @@ export default new Vuex.Store({
     //       ...mapState(['currentUser'])
 
     // 顶部高亮显示的url
-    headerSlug: '/'
+    headerSlug: '/',
+
+    // 示例项目Todos的数据
+    todoItems: {}, // 对象的字段有：id, title, content, finished,
+    todoNextID: 0
   },
 
   // Mutation用于变更Store中的数据：
@@ -34,8 +38,34 @@ export default new Vuex.Store({
       if (state.headerSlug !== slug) {
         state.headerSlug = slug
       } else {
-        console.log(state, slug)
+        // console.log(state, slug)
       }
+    },
+
+    // 示例项目Todos相关的方法
+    initTodoItems(state, todoItems) {
+      state.todoItems = todoItems
+    },
+    // 添加或者更新Todo对象
+    addOrUpdateTodoItem(state, obj) {
+      // 如果是字符串，就实例化对象
+      if (typeof obj === 'string') {
+        obj = {
+          title: obj,
+          content: obj,
+          finished: false
+        }
+      }
+      // 判断ID：没有传递ID就使用全局的
+      if (!obj.id) {
+        obj.id = state.todoNextID
+        state.todoNextID++
+      }
+      state.todoItems[obj.id] = obj
+    },
+    // 删除Todo对象
+    removeTodoItem(state, id) {
+      delete state.todoItems[id]
     }
   },
 
