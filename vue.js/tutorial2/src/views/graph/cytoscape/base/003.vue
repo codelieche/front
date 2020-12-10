@@ -5,11 +5,15 @@
 <script>
 import Cytoscape from 'cytoscape'
 // import canvas from 'cytoscape-canvas';
+import cytoscapeCola from 'cytoscape-cola'
+import dagre from 'cytoscape-dagre'
 
 // Cytoscape.use(canvas);
+Cytoscape.use(cytoscapeCola)
+Cytoscape.use(dagre)
 
 export default {
-  name: 'CytoscapeBaseDemo001',
+  name: 'CytoscapeBaseDemo003',
   mounted() {
     this.buildGraph()
   },
@@ -132,25 +136,25 @@ export default {
           {
             selector: 'node',
             css: {
-            //   content: 'data(app)',
+              //   content: 'data(app)',
               label: 'data(app)',
               'text-valign': 'center',
               'text-halign': 'center',
               shape: 'round-triangle', // 默认的形状是circle，增加了cytoscape-canvas 就支持shape属性了
               width: '35px',
               height: '35px',
-            //   'background-color': '#fff',
+              //   'background-color': '#fff',
               'border-width': '1px',
-              'border-color': '#999'
+              'border-color': '#999',
             },
           },
-           {
-        selector: 'node.mousehighlight[^isGroup]',
-        style: {
-          'background-color': 'red',
-          'border-color': 'blue'
-        }
-      },
+          {
+            selector: 'node.mousehighlight[^isGroup]',
+            style: {
+              'background-color': 'red',
+              'border-color': 'blue',
+            },
+          },
           {
             selector: ':parent',
             css: {
@@ -176,7 +180,17 @@ export default {
         },
 
         layout: {
-          name: 'cose', // cose, breadthfirst
+          // name: 'cose', // cose, breadthfirst
+          // name: 'cola', // cytoscape-cola需要这个
+          // animate: true,
+          // fit: true,
+
+          name: 'dagre', // cytoscape-dagre
+          animate: true,
+          fit: true,
+          transform: function (node, pos) {
+            return pos
+          },
         },
       }))
       // cy不可放入data中，要不它不断的变化，页面就卡主了

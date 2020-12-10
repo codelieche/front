@@ -9,7 +9,7 @@ import Cytoscape from 'cytoscape'
 // Cytoscape.use(canvas);
 
 export default {
-  name: 'CytoscapeBaseDemo001',
+  name: 'CytoscapeBaseDemo005',
   mounted() {
     this.buildGraph()
   },
@@ -96,15 +96,6 @@ export default {
           {
             selector: '.star',
             style: {
-              // width: 10,
-              // height: 10,
-              // color: 'red',
-              // position: 'relative',
-              // 'border-left': '100px solid transparent',
-              // 'border-right': '100px solid transparent',
-              // 'border-bottom': '70px solid red',
-              // transform: 'rotate(35deg)',
-
               // label
               color: '#fff',
               'font-size': '20px',
@@ -114,39 +105,19 @@ export default {
               'text-halign': 'center',
             },
           },
-          // {
-          //   selector: '.star:hover',
-          //   style: {
-          //     color: 'green',
-          //   },
-          // },
           {
-            selector: '.star:before',
+            selector: '.star:hover',
             style: {
-              content: 'Before',
-              width: 10,
-              height: 10,
-              // position: 'absolute',
-              // 'border-bottom': '80px solid red',
-              // 'border-left': '30px solid transparent',
-              // 'border-right': '30px solid transparent',
-              // top: '-50px',
-              // left: '-60px',
-              // 'transform': 'rotate(-35deg)',
+              color: 'green',
+              shape: 'star'
             },
           },
           // {
-          //   selector: '.star:after',
+          //   selector: '.star:before',
           //   style: {
-          //     content: '',
-          //     width: '0px',
-          //     height: '0px',
-          //     position: 'absolute',
-          //     'border-top': '70px solid red',
-          //     'border-left': '100px solid transparent',
-          //     'border-right': '100px solid transparent',
-          //     left: '-100px',
-          //     'transform': 'rotate(110deg)',
+          //     content: 'Before',
+          //     width: 10,
+          //     height: 10,
           //   },
           // },
         ],

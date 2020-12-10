@@ -26,7 +26,14 @@ const navData = [
         slug: 'base/005',
         title: '添加classes'
       },
-      
+      {
+        slug: 'base/006',
+        title: '形状shape'
+      },
+      {
+        slug: 'base/curve-style',
+        title: '线条类型'
+      }
     ].map(item => {
       return {
         icon: 'el-icon-arrow-right',
@@ -36,7 +43,7 @@ const navData = [
         level: 2
       }
     })
-  },
+  }
 ]
 
 export default navData
