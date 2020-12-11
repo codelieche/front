@@ -52,7 +52,7 @@ export default {
               content: 'data(id)',
               'text-valign': 'center',
               'text-halign': 'center',
-              shape: 'round-rectangle', // 默认的形状是circle，增加了cytoscape-canvas 就支持shape属性了
+              shape: 'round-rectangle', // 默认的形状是ellipse
               width: '35px',
               height: '35px',
             },

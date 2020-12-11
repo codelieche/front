@@ -138,11 +138,12 @@ export default {
             css: {
               //   content: 'data(app)',
               label: 'data(app)',
-              'text-valign': 'center',
+              'text-valign': 'bottom',
               'text-halign': 'center',
-              shape: 'round-triangle', // 默认的形状是circle，增加了cytoscape-canvas 就支持shape属性了
+              shape: 'round-triangle', // 默认的形状是ellipse
               width: '35px',
               height: '35px',
+              'font-size': 12,
               //   'background-color': '#fff',
               'border-width': '1px',
               'border-color': '#999',
@@ -170,6 +171,7 @@ export default {
               'line-color': '#999',
               width: '1px',
               label: 'data(label)',
+              'font-size': 12,
             },
           },
         ],
@@ -178,7 +180,7 @@ export default {
           nodes: this.nodes,
           edges: this.edges,
         },
-
+        maxZoom: 2,
         layout: {
           // name: 'cose', // cose, breadthfirst
           // name: 'cola', // cytoscape-cola需要这个

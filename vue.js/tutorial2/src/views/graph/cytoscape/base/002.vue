@@ -6,7 +6,7 @@
 import Cytoscape from 'cytoscape'
 import canvas from 'cytoscape-canvas'
 import cytoscapeCola from 'cytoscape-cola' // 推荐
-import dagre from 'cytoscape-dagre'  // 推荐
+import dagre from 'cytoscape-dagre' // 推荐
 // import cise from 'cytoscape-cise'
 import nodeHtmlLabel from 'cy-node-html-label'
 // import GroupCompoundLayout from './GroupCompoundLayout'
@@ -23,10 +23,11 @@ export default {
   name: 'CytoscapeBaseDemo002',
   mounted() {
     this.buildGraph()
+    window.buildGraph = this.buildGraph
   },
   data() {
     return {
-      count: 50,
+      count: 30,
       nodes: [
         // { data: { id: 'a' } },
       ],
@@ -59,7 +60,7 @@ export default {
       }
     },
     generateEdges() {
-      for (var i = 0; i < this.count * 1.5; i++) {
+      for (var i = 0; i < this.count * 1; i++) {
         var s = Math.floor(Math.random() * this.count)
         var t = Math.floor(Math.random() * this.count)
         if (s != t) {
@@ -83,6 +84,7 @@ export default {
       this.generateEdges()
       if (this.cy) {
         this.cy.destroy()
+        this.cy = undefined
       }
 
       var cy = (window.cy = Cytoscape({
@@ -95,7 +97,7 @@ export default {
               content: 'data(id)',
               'text-valign': 'bottom',
               'text-halign': 'center',
-              shape: 'round-rectangle', // 默认的形状是circle，增加了cytoscape-canvas 就支持shape属性了
+              shape: 'round-rectangle', // 默认的形状是ellipse
               width: '25px',
               height: '25px',
               'font-size': 6,
@@ -148,8 +150,7 @@ export default {
             selector: 'edge:selected',
             css: {
               width: '3px',
-              label: 'line',
-              'font-size': 3,
+              'font-size': 13,
             },
           },
         ],
@@ -165,7 +166,6 @@ export default {
           // animate: true,
           // fit: true,
           // nodeSpacing: 40,
-
           name: 'dagre', // cytoscape-dagre
           animate: true,
           fit: true,
@@ -177,63 +177,214 @@ export default {
           // animate: true,
           // fit: true,
         },
+        maxZoom: 3,
+        minZoom: 0.2,
       }))
       // cy不可放入data中，要不它不断的变化，页面就卡主了
       this.cy = cy
       cy.on('mouseover', 'node', function (evt) {
+        // 有高亮的就不处理
+        if(highlightElements.length > 0){
+          return 
+        }
+
         var node = evt.target
         node.addClass('hover')
         // 把它临近的节点也高亮
         // var nodeID = node.id()
-        evt.cy.elements().forEach((item) => {
-          // console.log(item)
-          // 是否为edge
-          if (item.isEdge()) {
-            if (item.source() === node) {
-              item.addClass('hover') // 把edge高亮
-              // 把target高亮
-              item.target().addClass('hover')
-            }
-            if (item.target() === node) {
-              item.addClass('hover') // 把edge高亮
-              // 把source高亮
-              item.source().addClass('hover')
-            }
-          }
+        // 元素的邻居：ele.neighborhood()()
+        node.neighborhood().forEach((item) => {
+          // console.log(item, item.isNode(), item.isEdge())
+          // 给相连的node或者edge添加hover类
+          item.addClass('hover')
         })
+
+        // evt.cy.elements().forEach((item) => {
+        //   // console.log(item)
+        //   // 是否为edge
+        //   if (item.isEdge()) {
+        //     if (item.source() === node) {
+        //       item.addClass('hover') // 把edge高亮
+        //       // 把target高亮
+        //       item.target().addClass('hover')
+        //     }
+        //     if (item.target() === node) {
+        //       item.addClass('hover') // 把edge高亮
+        //       // 把source高亮
+        //       item.source().addClass('hover')
+        //     }
+        //   }
+        // })
       })
       cy.on('mouseout', 'node', function (evt) {
+        // 有高亮的就不处理
+        if(highlightElements.length > 0){
+          return 
+        }
+
         var node = evt.target
         node.removeClass('hover')
 
-        evt.cy.elements().forEach((item) => {
-          // console.log(item)
-          // 是否为edge
-          if (item.isEdge()) {
-            if (item.source() === node) {
-              item.removeClass('hover') // 把edge高亮取消
-              // 把target高亮取消
-              item.target().removeClass('hover')
-            }
-            if (item.target() === node) {
-              item.removeClass('hover') // 把edge高亮取消
-              // 把source高亮取消
-              item.source().removeClass('hover')
-            }
-          }
+        // 元素的邻居：ele.neighborhood()()
+        node.neighborhood().forEach((item) => {
+          // console.log(item, item.isNode(), item.isEdge())
+          // 给相连的node或者edge添加hover类
+          item.removeClass('hover')
         })
+
+        // evt.cy.elements().forEach((item) => {
+        //   // console.log(item)
+        //   // 是否为edge
+        //   if (item.isEdge()) {
+        //     if (item.source() === node) {
+        //       item.removeClass('hover') // 把edge高亮取消
+        //       // 把target高亮取消
+        //       item.target().removeClass('hover')
+        //     }
+        //     if (item.target() === node) {
+        //       item.removeClass('hover') // 把edge高亮取消
+        //       // 把source高亮取消
+        //       item.source().removeClass('hover')
+        //     }
+        //   }
+        // })
       })
       cy.on('mouseover', 'edge', function (evt) {
+         // 有高亮的就不处理
+        if(highlightElements.length > 0){
+          return 
+        }
         var edge = evt.target
         window.ddd = evt
         // edge.activate()
         edge.addClass('hover')
       })
       cy.on('mouseout', 'edge', function (evt) {
+         // 有高亮的就不处理
+        if(highlightElements.length > 0){
+          return 
+        }
         var edge = evt.target
         // window.ddd = evt
         // edge.unactivate()
         edge.removeClass('hover')
+      })
+
+      // 高亮、点击选中节点，高亮时候的元素
+      var checkedTargetElement = []
+      var checkedSourceElement = []
+      var highlightElements = []
+
+      var hightlightSource = (ele) => {
+        if (checkedSourceElement.indexOf(ele) >= 0) {
+          return
+        } else {
+          checkedSourceElement.push(ele)
+        }
+        var neighborhoods = ele.neighborhood()
+        // 得到了所有邻居，可能是node和edge
+        neighborhoods.forEach((item) => {
+          if (item.isEdge() && item.target() == ele) {
+            item.addClass('hover')
+            item.source().addClass('hover')
+
+            // 高亮的列表
+            if (highlightElements.indexOf(item) < 0) {
+              highlightElements.push(item)
+            }
+            if (highlightElements.indexOf(item.source()) < 0) {
+              highlightElements.push(item.source())
+            }
+
+            // 遍历
+            hightlightSource(item.source())
+          }
+        })
+      }
+
+      var hightlightTarget = (ele) => {
+        if (checkedTargetElement.indexOf(ele) >= 0) {
+          return
+        } else {
+          checkedTargetElement.push(ele)
+        }
+        var neighborhoods = ele.neighborhood()
+        // 得到了所有邻居，可能是node和edge
+        neighborhoods.forEach((item) => {
+          if (item.isEdge() && item.source() == ele) {
+            item.addClass('hover')
+            item.target().addClass('hover')
+            // 高亮的列表
+            if (highlightElements.indexOf(item) < 0) {
+              highlightElements.push(item)
+            }
+            if (highlightElements.indexOf(item.target()) < 0) {
+              highlightElements.push(item.target())
+            }
+            // 遍历
+            hightlightTarget(item.target())
+          }
+        })
+      }
+
+      // 当节点点击的时候，选中出其所有关联的元素
+      cy.on('click', 'node', function (evt) {
+        var centerElement = evt.target
+        // var neighborhoods = centerElement.neighborhood()
+        // 得到了所有邻居，可能是node和edge
+        // console.log(neighborhoods)
+        // 根据Edge来处理：
+        // 如果target是中心元素，那么就对source高亮，对source的source高亮。
+        // 如果source是中心元素，那么就对target高亮，对target的target高亮
+         highlightElements.forEach((item) => {
+          item.removeClass('hover')
+        })
+        highlightElements = [centerElement]
+        hightlightTarget(centerElement)
+        hightlightSource(centerElement)
+      })
+
+      // 当节点点击的时候，选中出其所有关联的元素
+      cy.on('click', 'edge', function (evt) {
+        var centerElement = evt.target
+        // var neighborhoods = centerElement.neighborhood()
+        // 得到了所有邻居，可能是node和edge
+        // console.log(neighborhoods)
+        // 根据Edge来处理：
+        // 如果target是中心元素，那么就对source高亮，对source的source高亮。
+        // 如果source是中心元素，那么就对target高亮，对target的target高亮
+         highlightElements.forEach((item) => {
+          item.removeClass('hover')
+        })
+
+        highlightElements = [centerElement, centerElement.target(), centerElement.source()]
+        highlightElements.forEach(item => {
+          item.addClass('hover')
+        })
+        hightlightTarget(centerElement.target())
+        hightlightSource(centerElement.source())
+      })
+
+      cy.on('unselect', 'node', function (evt) {
+        // console.log(evt)
+        evt == evt
+        highlightElements.forEach((item) => {
+          item.removeClass('hover')
+        })
+        checkedTargetElement = []
+        checkedSourceElement = []
+        highlightElements = []
+      })
+
+       cy.on('unselect', 'edge', function (evt) {
+        // console.log(evt)
+        evt == evt
+        highlightElements.forEach((item) => {
+          item.removeClass('hover')
+        })
+        checkedTargetElement = []
+        checkedSourceElement = []
+        highlightElements = []
       })
     },
     destroy() {

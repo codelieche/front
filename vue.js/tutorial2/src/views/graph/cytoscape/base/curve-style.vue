@@ -74,7 +74,7 @@ export default {
               // label: 'data(label)',
               'text-valign': 'bottom',
               'text-halign': 'center',
-              // shape: 'round-triangle', // 默认的形状是circle，增加了cytoscape-canvas 就支持shape属性了
+              // shape: 'round-triangle', // 默认的形状是ellipse
               width: '25px',
               height: '25px',
               //   'background-color': '#fff',

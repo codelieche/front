@@ -43,6 +43,32 @@ const navData = [
         level: 2
       }
     })
+  },
+  {
+    icon: 'el-icon-s-custom',
+    key: '/graph/custom/',
+    // slug: '/graph/cytoscape/',
+    title: '自定义',
+    level: 1,
+    children: [
+      { slug: 'custom/classes', title: '添加classes' },
+      {
+        slug: 'custom/color',
+        title: '设置颜色'
+      },
+      {
+        slug: 'custom/event',
+        title: '添加事件'
+      }
+    ].map(item => {
+      return {
+        icon: 'el-icon-arrow-right',
+        key: `/graph/cytoscape/${item.slug}`,
+        slug: `/graph/cytoscape/${item.slug}`,
+        title: item.title,
+        level: 2
+      }
+    })
   }
 ]
 
