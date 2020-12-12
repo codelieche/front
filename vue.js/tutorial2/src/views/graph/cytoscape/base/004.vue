@@ -9,7 +9,7 @@ import Cytoscape from 'cytoscape'
 // Cytoscape.use(canvas);
 
 export default {
-  name: 'CytoscapeBaseDemo001',
+  name: 'CytoscapeBaseDemo004',
   mounted() {
     this.buildGraph()
   },
