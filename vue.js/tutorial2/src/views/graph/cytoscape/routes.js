@@ -24,13 +24,27 @@ var subComponents = [
   'custom/classes',
   'custom/color',
   'custom/event',
+
+  // 示例
+  {
+    path: 'demo/devops',
+    filename: 'demo/devops/index'
+  }
 ]
 
 subComponents.forEach(item => {
-  routes.push({
-    path: item,
-    component: () => import(`./${item}.vue`)
-  })
+  if(typeof(item) === 'object'){
+    routes.push({
+      path: item.path,
+      component: () => import(`./${item.filename}.vue`)
+    })
+  }else{
+    routes.push({
+      path: item,
+      component: () => import(`./${item}.vue`)
+    })
+  }
+  
 })
 
 export default routes

@@ -4,20 +4,20 @@
 
 <script>
 import Cytoscape from 'cytoscape'
-import canvas from 'cytoscape-canvas'
-import cytoscapeCola from 'cytoscape-cola' // 推荐
-import dagre from 'cytoscape-dagre' // 推荐
+// import canvas from 'cytoscape-canvas'
+// import cytoscapeCola from 'cytoscape-cola' // 推荐
+// import dagre from 'cytoscape-dagre' // 推荐
 // import cise from 'cytoscape-cise'
-import nodeHtmlLabel from 'cy-node-html-label'
+// import nodeHtmlLabel from 'cy-node-html-label'
 // import GroupCompoundLayout from './GroupCompoundLayout'
 
-Cytoscape.use(canvas)
-Cytoscape.use(cytoscapeCola)
-Cytoscape.use(dagre)
+// Cytoscape.use(canvas)
+// Cytoscape.use(cytoscapeCola)
+// Cytoscape.use(dagre)
 // Cytoscape.use(cise)
 // Cytoscape('layout', 'group-compound-layout', GroupCompoundLayout);
 
-nodeHtmlLabel(Cytoscape)
+// nodeHtmlLabel(Cytoscape)
 
 export default {
   name: 'CytoscapeBaseDemo002',
@@ -104,7 +104,7 @@ export default {
             },
           },
           {
-            selector: 'node.hover',
+            selector: 'node.highlight',
             style: {
               'border-color': '#3aa5dc',
               'border-width': '3px',
@@ -134,7 +134,7 @@ export default {
             },
           },
           {
-            selector: 'edge.hover',
+            selector: 'edge.highlight',
             style: {
               'line-color': '#3aa5dc',
               'target-arrow-color': '#3aa5dc',
@@ -189,14 +189,14 @@ export default {
         }
 
         var node = evt.target
-        node.addClass('hover')
+        node.addClass('highlight')
         // 把它临近的节点也高亮
         // var nodeID = node.id()
         // 元素的邻居：ele.neighborhood()()
         node.neighborhood().forEach((item) => {
           // console.log(item, item.isNode(), item.isEdge())
-          // 给相连的node或者edge添加hover类
-          item.addClass('hover')
+          // 给相连的node或者edge添加highlight类
+          item.addClass('highlight')
         })
 
         // evt.cy.elements().forEach((item) => {
@@ -204,14 +204,14 @@ export default {
         //   // 是否为edge
         //   if (item.isEdge()) {
         //     if (item.source() === node) {
-        //       item.addClass('hover') // 把edge高亮
+        //       item.addClass('highlight') // 把edge高亮
         //       // 把target高亮
-        //       item.target().addClass('hover')
+        //       item.target().addClass('highlight')
         //     }
         //     if (item.target() === node) {
-        //       item.addClass('hover') // 把edge高亮
+        //       item.addClass('highlight') // 把edge高亮
         //       // 把source高亮
-        //       item.source().addClass('hover')
+        //       item.source().addClass('highlight')
         //     }
         //   }
         // })
@@ -223,13 +223,13 @@ export default {
         }
 
         var node = evt.target
-        node.removeClass('hover')
+        node.removeClass('highlight')
 
         // 元素的邻居：ele.neighborhood()()
         node.neighborhood().forEach((item) => {
           // console.log(item, item.isNode(), item.isEdge())
-          // 给相连的node或者edge添加hover类
-          item.removeClass('hover')
+          // 给相连的node或者edge添加highlight类
+          item.removeClass('highlight')
         })
 
         // evt.cy.elements().forEach((item) => {
@@ -237,14 +237,14 @@ export default {
         //   // 是否为edge
         //   if (item.isEdge()) {
         //     if (item.source() === node) {
-        //       item.removeClass('hover') // 把edge高亮取消
+        //       item.removeClass('highlight') // 把edge高亮取消
         //       // 把target高亮取消
-        //       item.target().removeClass('hover')
+        //       item.target().removeClass('highlight')
         //     }
         //     if (item.target() === node) {
-        //       item.removeClass('hover') // 把edge高亮取消
+        //       item.removeClass('highlight') // 把edge高亮取消
         //       // 把source高亮取消
-        //       item.source().removeClass('hover')
+        //       item.source().removeClass('highlight')
         //     }
         //   }
         // })
@@ -257,7 +257,7 @@ export default {
         var edge = evt.target
         window.ddd = evt
         // edge.activate()
-        edge.addClass('hover')
+        edge.addClass('highlight')
       })
       cy.on('mouseout', 'edge', function (evt) {
          // 有高亮的就不处理
@@ -267,7 +267,7 @@ export default {
         var edge = evt.target
         // window.ddd = evt
         // edge.unactivate()
-        edge.removeClass('hover')
+        edge.removeClass('highlight')
       })
 
       // 高亮、点击选中节点，高亮时候的元素
@@ -285,8 +285,8 @@ export default {
         // 得到了所有邻居，可能是node和edge
         neighborhoods.forEach((item) => {
           if (item.isEdge() && item.target() == ele) {
-            item.addClass('hover')
-            item.source().addClass('hover')
+            item.addClass('highlight')
+            item.source().addClass('highlight')
 
             // 高亮的列表
             if (highlightElements.indexOf(item) < 0) {
@@ -312,8 +312,8 @@ export default {
         // 得到了所有邻居，可能是node和edge
         neighborhoods.forEach((item) => {
           if (item.isEdge() && item.source() == ele) {
-            item.addClass('hover')
-            item.target().addClass('hover')
+            item.addClass('highlight')
+            item.target().addClass('highlight')
             // 高亮的列表
             if (highlightElements.indexOf(item) < 0) {
               highlightElements.push(item)
@@ -337,7 +337,7 @@ export default {
         // 如果target是中心元素，那么就对source高亮，对source的source高亮。
         // 如果source是中心元素，那么就对target高亮，对target的target高亮
          highlightElements.forEach((item) => {
-          item.removeClass('hover')
+          item.removeClass('highlight')
         })
         highlightElements = [centerElement]
         hightlightTarget(centerElement)
@@ -354,12 +354,12 @@ export default {
         // 如果target是中心元素，那么就对source高亮，对source的source高亮。
         // 如果source是中心元素，那么就对target高亮，对target的target高亮
          highlightElements.forEach((item) => {
-          item.removeClass('hover')
+          item.removeClass('highlight')
         })
 
         highlightElements = [centerElement, centerElement.target(), centerElement.source()]
         highlightElements.forEach(item => {
-          item.addClass('hover')
+          item.addClass('highlight')
         })
         hightlightTarget(centerElement.target())
         hightlightSource(centerElement.source())
@@ -369,7 +369,7 @@ export default {
         // console.log(evt)
         evt == evt
         highlightElements.forEach((item) => {
-          item.removeClass('hover')
+          item.removeClass('highlight')
         })
         checkedTargetElement = []
         checkedSourceElement = []
@@ -380,7 +380,7 @@ export default {
         // console.log(evt)
         evt == evt
         highlightElements.forEach((item) => {
-          item.removeClass('hover')
+          item.removeClass('highlight')
         })
         checkedTargetElement = []
         checkedSourceElement = []

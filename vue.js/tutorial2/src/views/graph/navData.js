@@ -69,6 +69,26 @@ const navData = [
         level: 2
       }
     })
+  },
+  // 综合示例
+  {
+    icon: 'el-icon-s-custom',
+    key: '/graph/cytoscape/demo',
+    // slug: '/graph/cytoscape/',
+    title: '综合示例',
+    level: 1,
+    children: [
+      { slug: 'demo/devops', title: 'DevOps' },
+     
+    ].map(item => {
+      return {
+        icon: 'el-icon-arrow-right',
+        key: `/graph/cytoscape/${item.slug}`,
+        slug: `/graph/cytoscape/${item.slug}`,
+        title: item.title,
+        level: 2
+      }
+    })
   }
 ]
 
