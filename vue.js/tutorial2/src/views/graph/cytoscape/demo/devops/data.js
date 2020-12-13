@@ -6,6 +6,34 @@ var data = {
         type: 'service',
         label: 'istio-gateway'
       }
+    },
+    {
+      data: {
+        id: 'istio-kiali',
+        type: 'service',
+        label: 'istio-kiali'
+      }
+    },
+    {
+      data: {
+        id: 'prometheus',
+        type: 'service',
+        label: 'prometheus'
+      }
+    },
+    {
+      data: {
+        id: 'grafana',
+        type: 'service',
+        label: 'grafana'
+      }
+    },
+    {
+      data: {
+        id: 'mysql',
+        type: 'pod',
+        label: 'grafana'
+      }
     }
   ],
   edges: [
@@ -14,6 +42,13 @@ var data = {
         id: 'istio-gateway--devops-front',
         source: 'istio-gateway',
         target: 'devops-front'
+      }
+    },
+    {
+      data: {
+        id: 'grafana--prometheus',
+        source: 'grafana',
+        target: 'prometheus'
       }
     }
   ]
@@ -46,26 +81,16 @@ apps.forEach(item => {
 
 // 构造边的数据
 var edges = {
-  front:
-    'account cmdb cloud operation database project workflow',
-  account:
-    'logs monitor message',
-  cmdb:
-    'account database logs monitor',
-  cloud:
-    'account cmdb project logs monitor message',
-  operation:
-    'account cmdb cloud database logs message',
-  database:
-    'account cloud project logs monitor message',
-  project:
-    'account cmdb cloud operation database logs',
-  workflow:
-    'account cmdb cloud project logs message',
-  logs:
-    'account',
-  monitor:
-    'cmdb cloud database',
+  front: 'account cmdb cloud operation database',
+  account: 'logs message',
+  cmdb: 'database logs monitor',
+  cloud: 'monitor message',
+  operation: 'cmdb cloud database logs',
+  database: 'logs monitor',
+  project: 'database logs',
+  workflow: 'logs',
+  logs: 'message',
+  monitor: 'cmdb cloud database',
   message: 'account project'
 }
 

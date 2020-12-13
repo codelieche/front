@@ -1,6 +1,6 @@
 const navData = [
   {
-    icon: 'el-icon-s-custom',
+    icon: 'el-icon-menu',
     key: '/graph/cytoscape/',
     // slug: '/graph/cytoscape/',
     title: '基本使用',
@@ -45,7 +45,7 @@ const navData = [
     })
   },
   {
-    icon: 'el-icon-s-custom',
+    icon: 'el-icon-s-promotion',
     key: '/graph/custom/',
     // slug: '/graph/cytoscape/',
     title: '自定义',
@@ -72,7 +72,7 @@ const navData = [
   },
   // 综合示例
   {
-    icon: 'el-icon-s-custom',
+    icon: 'el-icon-monitor',
     key: '/graph/cytoscape/demo',
     // slug: '/graph/cytoscape/',
     title: '综合示例',

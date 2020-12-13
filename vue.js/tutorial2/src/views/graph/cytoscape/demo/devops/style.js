@@ -8,19 +8,28 @@ var styles = [
       shape: 'round-rectangle', // 默认的形状是ellipse
       width: '35px',
       height: '35px',
-      'font-size': 12
+      'font-size': 12,
+      'background-image': '/img/pod.png',
+      'background-width': '15px',
+      'background-height': '15px',
+      'background-color': '#76a5fc',
+    //   opacity: 0.7,
+      'border-width': 0.1,
+      'border-color': '#999'
     }
   },
   {
     selector: 'node.highlight',
     style: {
-      'border-color': '#3aa5dc',
-      'border-width': '3px',
-      'background-color': '#3aa5dc',
-      opacity: 0.8,
+    //   'border-color': '#3aa5dc',
+    'background-color': '#3572E4',
+    //   'border-width': '3px',
+      opacity: 1,
       width: '45px',
       height: '45px',
-      'font-size': 14
+      'font-size': 14,
+      'background-width': '20px',
+      'background-height': '20px',
     }
   },
 
