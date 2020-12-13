@@ -9,7 +9,8 @@ import {
     Popover, Tooltip,
     Card, Divider,
     Table, TableColumn, Tag,
-    Switch
+    Switch,
+    Dialog,
 } from 'element-ui';
 
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 2 };
@@ -32,6 +33,7 @@ Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Tag)
 Vue.use(Switch)
+Vue.use(Dialog)
 
 Vue.prototype.$message = Message
 
