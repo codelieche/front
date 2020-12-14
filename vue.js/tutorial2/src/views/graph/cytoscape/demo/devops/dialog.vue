@@ -19,21 +19,25 @@ export default {
     }
   },
   beforeUpdate() {},
-  beforeDestroy(){
-      this.destroyGraph()
+  beforeDestroy() {
+    this.destroyGraph()
   },
   methods: {
     buildGraph() {
       this.destroyGraph()
+      //   布局名字
+      var layoutName = this.elements.length > 50 ? 'cola' : 'dagre'
       var cy = (window.cyDialog = Cytoscape({
         container: document.getElementById('cy-dialog'),
         boxSelectionEnabled: false,
         style: graphStyles,
         elements: this.elements,
         layout: {
-          name: 'dagre',
+          //   name: 'dagre',
           //   name: 'circle',
+          name: layoutName,
           fit: true,
+          rankDir: 'LR'
         },
         minZoom: 0.5,
         maxZoom: 2.5,

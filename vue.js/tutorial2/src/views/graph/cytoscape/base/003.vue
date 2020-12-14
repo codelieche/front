@@ -170,7 +170,7 @@ export default {
               'target-arrow-shape': 'triangle',
               'line-color': '#999',
               width: '1px',
-              label: 'data(label)',
+              // label: 'data(label)',
               'font-size': 12,
             },
           },
@@ -190,6 +190,7 @@ export default {
           name: 'dagre', // cytoscape-dagre
           animate: true,
           fit: true,
+          rankDir: 'LR',
           transform: function (node, pos) {
             return pos
           },

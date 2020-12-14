@@ -41,14 +41,16 @@ var data = {
       data: {
         id: 'istio-gateway--devops-front',
         source: 'istio-gateway',
-        target: 'devops-front'
+        target: 'devops-front',
+        label: '10ms'
       }
     },
     {
       data: {
         id: 'grafana--prometheus',
         source: 'grafana',
-        target: 'prometheus'
+        target: 'prometheus',
+        label: '12ms'
       }
     }
   ]
@@ -102,7 +104,8 @@ for (var source in edges) {
         data: {
           id: `devops-${source}--devops-${item}`,
           source: `devops-${source}`,
-          target: `devops-${item}`
+          target: `devops-${item}`,
+          label: '15ms'
         }
       })
     }

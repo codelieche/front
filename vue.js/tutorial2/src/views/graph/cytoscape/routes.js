@@ -24,27 +24,34 @@ var subComponents = [
   'custom/classes',
   'custom/color',
   'custom/event',
+  {
+    path: 'custom/nodeHtmlLabel',
+    filename: 'custom/nodeHtmlLabel/index'
+  },
 
   // 示例
   {
     path: 'demo/devops',
     filename: 'demo/devops/index'
+  },
+  {
+    path: 'demo/bookstore',
+    filename: 'demo/bookstore/index'
   }
 ]
 
 subComponents.forEach(item => {
-  if(typeof(item) === 'object'){
+  if (typeof item === 'object') {
     routes.push({
       path: item.path,
       component: () => import(`./${item.filename}.vue`)
     })
-  }else{
+  } else {
     routes.push({
       path: item,
       component: () => import(`./${item}.vue`)
     })
   }
-  
 })
 
 export default routes
