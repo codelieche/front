@@ -2,26 +2,52 @@
   <div class="full">
     <div class="title">综合示例:Bookstore</div>
     <div id="cy"></div>
+    <el-dialog
+      :visible.sync="showDialog"
+      width="60%"
+      style="background: transparent"
+      :before-close="handleDialogGraphClose"
+      :destroy-on-close="true"
+    >
+      <DialogGraph
+        :display="showDialog"
+        :elements="showElements"
+        :getElementNeighbordByID="getElementNeighbordByID"
+        :styles="styles"
+      />
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import Cytoscape from 'cytoscape'
+import cytoscape from 'cytoscape'
 // import nodeHtmlLabel from 'cy-node-html-label'
 
 import elements from './data.js'
 import graphStyles from './style.js'
 import handleHoverEvents from '../devops/hoverEvent.js'
+// 弹出组件
+import DialogGraph from '../devops/dialog'
 
 // nodeHtmlLabel(Cytoscape)
 
 export default {
   name: 'GraphDemoDevOps',
-  components: {},
+  components: { DialogGraph },
+  props: {
+    styles: {
+      type: Array,
+      default() {
+        return graphStyles
+      },
+    },
+  },
   data() {
     return {
       ...elements,
       haveEleSelected: false,
+      showDialog: false, // 是否显示对话框
+      showElements: [], // 对话框要展示的元素
     }
   },
   mounted() {
@@ -38,8 +64,8 @@ export default {
 
       //   布局名字
       var layoutName = this.nodes.length > 30 ? 'cola' : 'dagre'
-
-      var cy = (window.cy = Cytoscape({
+      // console.log(this.nodes)
+      var cy = cytoscape({
         container: document.getElementById('cy'),
         boxSelectionEnabled: false,
         style: graphStyles,
@@ -53,13 +79,14 @@ export default {
           //   name: 'circle',
           name: layoutName,
           fit: true,
-          rankDir: 'LR' // 默认是TB
+          rankDir: 'LR', // 默认是TB
         },
         minZoom: 0.2,
         maxZoom: 2,
-      }))
+      })
 
       this.cy = cy
+      window.cy = cy
 
       // nodeHtmlLabel
       // cy.nodeHtmlLabel([
@@ -82,21 +109,66 @@ export default {
 
       // 事件处理
       handleHoverEvents(cy)
+      // 点击事件
+      var that = this
+      cy.on('click', 'node', (evt) => {
+        var ele = evt.target
+        var id = ele.id()
+        that.getElementNeighbordByID(id)
+      })
+      cy.on('click', 'edge', (evt) => {
+        var ele = evt.target
+        var id = ele.id()
+        that.getElementNeighbordByID(id)
+      })
     },
+    
     // 获取元素的邻居节点
     getElementNeighbordByID(id) {
       var ele = this.cy.$('#' + id)
       var neighborhood = ele.neighborhood()
-      var showElements = [{ data: ele.data() }]
+      var needChangeElementsID = false
+
+      // 判断是否是边
+      if (ele.isEdge()) {
+        neighborhood = [ele.source(), ele.target()]
+      }
+      var showElements = [{ data: ele.data(), classes: ele.classes() }]
       for (var i = 0; i < neighborhood.length; i++) {
         var item = neighborhood[i]
         // console.log(i, item)
-        showElements.push({ data: item.data() })
+        if (!needChangeElementsID && item.data().parent) {
+          needChangeElementsID = true
+        }
+        showElements.push({ data: item.data(), classes: item.classes() })
       }
+
+      // 判断是否需要变更ID
+      if (needChangeElementsID) {
+        // 因为弹出新的图形之后，图形会变乱，所以把元素的ID变更一下，这样关闭弹出的图形也不会让旧的图形变乱了
+        // 这里当量很大的时候，性能是个问题，但是这是修复图形变乱问题的唯一方式
+        var showElementsStr = JSON.stringify(showElements)
+        showElements.map((item) => {
+          showElementsStr = showElementsStr.replaceAll(
+            item.id,
+            `${item.id}-dialog`
+          )
+        })
+        showElements = JSON.parse(showElementsStr)
+      }
+
       // 对新的elements进行赋值
       // console.log(showElements)
       this.showElements = showElements
       this.showDialog = true
+    },
+
+    handleDialogGraphClose() {
+      // console.log("handleDialogGraphClose")
+      this.showDialog = false
+      this.showElements = []
+      this.buildGraph()
+      // window.location.reload();
     },
 
     destroyGraph() {

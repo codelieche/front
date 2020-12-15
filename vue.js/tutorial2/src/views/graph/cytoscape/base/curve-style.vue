@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Cytoscape from 'cytoscape'
+import cytoscape from 'cytoscape'
 // import canvas from 'cytoscape-canvas';
 
 // Cytoscape.use(canvas);
@@ -63,7 +63,7 @@ export default {
         this.cy.destroy()
       }
 
-      var cy = (window.cy = Cytoscape({
+      var cy = (window.cy = cytoscape({
         container: document.getElementById('cy'),
         boxSelectionEnabled: false,
         style: [

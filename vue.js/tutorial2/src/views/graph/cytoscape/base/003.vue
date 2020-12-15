@@ -3,14 +3,7 @@
 </template>
 
 <script>
-import Cytoscape from 'cytoscape'
-// import canvas from 'cytoscape-canvas';
-import cytoscapeCola from 'cytoscape-cola'
-import dagre from 'cytoscape-dagre'
-
-// Cytoscape.use(canvas);
-Cytoscape.use(cytoscapeCola)
-Cytoscape.use(dagre)
+import cytoscape from 'cytoscape'
 
 export default {
   name: 'CytoscapeBaseDemo003',
@@ -129,7 +122,7 @@ export default {
         this.cy.destroy()
       }
 
-      var cy = (window.cy = Cytoscape({
+      var cy = (window.cy = cytoscape({
         container: document.getElementById('cy'),
         boxSelectionEnabled: false,
         style: [

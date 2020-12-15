@@ -1,6 +1,6 @@
 <template>
   <div class="full">
-    <div class="title" @click="buildGraph">自定义:nodeHtmlLabel</div>
+    <div class="title" @click="buildGraph">自定义:shape</div>
     <div id="cy"></div>
   </div>
 </template>
@@ -10,7 +10,6 @@ import cytoscape from 'cytoscape'
 // import nodeHtmlLabel from 'cy-node-html-label'
 
 import generateElements from './data.js'
-// import data01 from './data01.js'
 import graphStyles from './style.js'
 import handleHoverEvents from './hoverEvent.js'
 
@@ -48,7 +47,6 @@ export default {
         boxSelectionEnabled: false,
         style: graphStyles,
         elements: this.elements,
-        // elements: data01,
         layout: {
           //   name: 'dagre',
           //   name: 'cola', // cytoscape-cola需要这个
@@ -63,26 +61,6 @@ export default {
 
       this.cy = cy
 
-      // nodeHtmlLabel
-      cy.nodeHtmlLabel([
-        {
-          query: 'node',
-          cssClass: 'nodeHtmlLabel',
-          tpl: function (data) {
-            // 请返回span的元素，div的无法设置background，span的ok
-            if (data.isGroup) {
-              return '<spn class="group">' + '' + '</span>'
-            } else {
-              return (
-                `<span class="shape ${data.nodeType}">` +
-                '<span></span>' +
-                '</span>'
-              )
-            }
-          },
-        },
-      ])
-
       // 事件处理
       handleHoverEvents(cy)
     },
@@ -96,7 +74,6 @@ export default {
         // console.log(i, item)
         showElements.push({ data: item.data() })
       }
-
       // 对新的elements进行赋值
       // console.log(showElements)
       this.showElements = showElements
@@ -113,7 +90,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .full {
   display: flex;
   flex-direction: column;
@@ -128,44 +105,6 @@ export default {
   }
   #cy {
     flex: 1;
-  }
-  .nodeHtmlLabel {
-    width: 35px;
-    height: 35px;
-    // background-color: #76a5fc;
-    background-color: #fff;
-
-    // 非Group的
-    span.shape {
-      width: 35px;
-      height: 35px;
-      // border: 1px solid #fff;
-      border-radius: 3px;
-      display: block;
-      span {
-        display: inline-block;
-      }
-      &:hover{
-        opacity: 1;
-      }
-    }
-    .service {
-      background: #595959;
-    }
-
-    .app {
-      background: #76a5fc;
-    }
-
-    .workload {
-      background: red;
-    }
-    .operation {
-      background: #3e3;
-    }
-    .serviceEntry {
-      background: orange;
-    }
   }
 }
 </style>

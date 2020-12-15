@@ -41,7 +41,6 @@ var generateEdges = count => {
           source: 'devops-' + s,
           target: 'devops-' + t,
           label: '50ms',
-          type: 'cubic-horizontal',
           edgeType: edgeTypes[index],
         }
       })

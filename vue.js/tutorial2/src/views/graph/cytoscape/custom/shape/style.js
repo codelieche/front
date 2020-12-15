@@ -15,8 +15,12 @@ var styles = [
             return 'round-rectangle'
           case 'service':
             return 'triangle'
-          default:
+          case 'workload':
             return 'ellipse'
+          case 'serviceEntry':
+            return 'round-tag'
+          default:
+            return 'octagon'
         }
       },
       width: '35px',
@@ -42,19 +46,19 @@ var styles = [
       'background-height': '15px',
       //   'background-color': '#76a5fc',
       'background-color': '#9d9d9d',
-      // 'background-color': ele => {
-      //   var data = ele.data()
-      //   switch (data.nodeType) {
-      //     case 'app':
-      //       if (data.isGroup) {
-      //         return '#f9f9f9'
-      //       } else {
+      //   'background-color': ele => {
+      //     var data = ele.data()
+      //     switch (data.nodeType) {
+      //       case 'app':
+      //         if (data.isGroup) {
+      //           return '#f9f9f9'
+      //         } else {
+      //           return '#76a5fc'
+      //         }
+      //       default:
       //         return '#76a5fc'
-      //       }
-      //     default:
-      //       return '#76a5fc'
-      //   }
-      // },
+      //     }
+      //   },
       ghost: 'yes',
       'ghost-offset-x': 1,
       'ghost-offset-y': 1,
@@ -73,27 +77,27 @@ var styles = [
         }
       },
       color: '#555',
-      //   label: 'data(label)',
-      //   label: 'data(app)',
-      label: ele => {
-        var data = ele.data()
-        switch (data.nodeType) {
-          case 'app':
-            if (data.version) {
-              return data.version
-            } else {
-              return data.app
-            }
-          case 'service':
-            return data.service
-          default:
-            if (data.app) {
-              return data.app
-            } else {
-              return ''
-            }
-        }
-      }
+      label: 'data(label)'
+      // label: 'data(app)',
+      // label: ele => {
+      //   var data = ele.data()
+      //   switch (data.nodeType) {
+      //     case 'app':
+      //       if (data.version) {
+      //         return data.version
+      //       } else {
+      //         return data.app
+      //       }
+      //     case 'service':
+      //       return data.service
+      //     default:
+      //       if (data.app) {
+      //         return data.app
+      //       } else {
+      //         return ''
+      //       }
+      //   }
+      // }
     }
   },
   {
@@ -115,7 +119,6 @@ var styles = [
     css: {
       'text-valign': 'bottom',
       'text-halign': 'center'
-      // 'color': 'red'
     }
   },
   //   有子元素的Node节点，特别注意selector的顺序
@@ -135,7 +138,41 @@ var styles = [
       //   'curve-style': 'unbundled-bezier',
       //   'target-arrow-shape': 'triangle',
       'target-arrow-shape': 'vee',
-      'line-color': '#999',
+      // 'line-color': '#999',
+      'line-color': ele => {
+        var data = ele.data()
+        switch (data.edgeType) {
+          case 'success':
+            return 'green'
+          case 'warn':
+            return 'orange'
+          case 'error':
+            return 'red'
+          case 'idle':
+            return '#999'
+          case 'mtls':
+            return '#444'
+          default:
+            return '#999'
+        }
+      },
+      'target-arrow-color': ele => {
+        var data = ele.data()
+        switch (data.edgeType) {
+          case 'success':
+            return 'green'
+          case 'warn':
+            return 'orange'
+          case 'error':
+            return 'red'
+          case 'idle':
+            return '#999'
+          case 'mtls':
+            return '#444'
+          default:
+            return '#999'
+        }
+      },
       width: '0.5px',
       // label: 'data(label)',
       label: '5ms',
@@ -146,8 +183,8 @@ var styles = [
   {
     selector: 'edge.highlight',
     style: {
-      'line-color': '#3aa5dc',
-      'target-arrow-color': '#3aa5dc',
+      // 'line-color': '#3aa5dc',
+      // 'target-arrow-color': '#3aa5dc',
       opacity: 0.8,
       width: '1.5px',
       'font-size': 12,

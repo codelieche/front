@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Cytoscape from 'cytoscape'
+import cytoscape from 'cytoscape'
 import graphStyles from './style.js'
 
 export default {
@@ -12,6 +12,12 @@ export default {
     display: Boolean,
     elements: Array,
     getElementNeighbordByID: Function,
+    styles: {
+      type: Array,
+      default() {
+        return graphStyles
+      },
+    },
   },
   mounted() {
     if (this.display && this.elements.length > 0) {
@@ -27,24 +33,29 @@ export default {
       this.destroyGraph()
       //   布局名字
       var layoutName = this.elements.length > 50 ? 'cola' : 'dagre'
-      var cy = (window.cyDialog = Cytoscape({
+      var cy = cytoscape({
         container: document.getElementById('cy-dialog'),
         boxSelectionEnabled: false,
-        style: graphStyles,
+        style: this.styles,
         elements: this.elements,
         layout: {
           //   name: 'dagre',
           //   name: 'circle',
           name: layoutName,
           fit: true,
-          rankDir: 'LR'
+          rankDir: 'LR',
         },
         minZoom: 0.5,
         maxZoom: 2.5,
-      }))
+      })
       this.cy = cy
       var that = this
       cy.on('click', 'node', (evt) => {
+        var ele = evt.target
+        var id = ele.id()
+        that.getElementNeighbordByID(id)
+      })
+      cy.on('click', 'edge', (evt) => {
         var ele = evt.target
         var id = ele.id()
         that.getElementNeighbordByID(id)
@@ -53,7 +64,9 @@ export default {
     },
     destroyGraph() {
       if (this.cy) {
+        // console.log('dialog destroy graph')
         this.cy.destroy()
+        this.cy = undefined
       }
     },
   },
@@ -61,6 +74,13 @@ export default {
     elements() {
       if (this.elements.length > 0) {
         this.buildGraph()
+      }
+    },
+    display() {
+      
+
+      if (!this.display) {
+        this.destroyGraph()
       }
     },
   },

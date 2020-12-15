@@ -61,6 +61,10 @@ const navData = [
         title: '添加事件'
       },
       {
+        slug: 'custom/shape',
+        title: '形状: shape'
+      },
+      {
         slug: 'custom/nodeHtmlLabel',
         title: 'nodeHtmlLabel'
       },

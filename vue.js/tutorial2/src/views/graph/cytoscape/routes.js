@@ -25,6 +25,10 @@ var subComponents = [
   'custom/color',
   'custom/event',
   {
+    path: 'custom/shape',
+    filename: 'custom/shape/index'
+  },
+  {
     path: 'custom/nodeHtmlLabel',
     filename: 'custom/nodeHtmlLabel/index'
   },
