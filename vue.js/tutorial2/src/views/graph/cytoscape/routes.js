@@ -32,6 +32,10 @@ var subComponents = [
     path: 'custom/nodeHtmlLabel',
     filename: 'custom/nodeHtmlLabel/index'
   },
+  {
+    path: 'custom/weblink',
+    filename: 'custom/weblink/index'
+  },
 
   // 示例
   {

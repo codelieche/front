@@ -68,6 +68,10 @@ const navData = [
         slug: 'custom/nodeHtmlLabel',
         title: 'nodeHtmlLabel'
       },
+      {
+        slug: 'custom/weblink',
+        title: 'weblink'
+      },
     ].map(item => {
       return {
         icon: 'el-icon-arrow-right',
