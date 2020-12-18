@@ -3,14 +3,7 @@
 </template>
 
 <script>
-import Cytoscape from 'cytoscape'
-// import canvas from 'cytoscape-canvas';
-import cytoscapeCola from 'cytoscape-cola'
-import dagre from 'cytoscape-dagre'
-
-// Cytoscape.use(canvas);
-Cytoscape.use(cytoscapeCola)
-Cytoscape.use(dagre)
+import cytoscape from 'cytoscape'
 
 export default {
   name: 'CytoscapeBaseDemo003',
@@ -129,7 +122,7 @@ export default {
         this.cy.destroy()
       }
 
-      var cy = (window.cy = Cytoscape({
+      var cy = (window.cy = cytoscape({
         container: document.getElementById('cy'),
         boxSelectionEnabled: false,
         style: [
@@ -170,7 +163,7 @@ export default {
               'target-arrow-shape': 'triangle',
               'line-color': '#999',
               width: '1px',
-              label: 'data(label)',
+              // label: 'data(label)',
               'font-size': 12,
             },
           },
@@ -190,6 +183,7 @@ export default {
           name: 'dagre', // cytoscape-dagre
           animate: true,
           fit: true,
+          rankDir: 'LR',
           transform: function (node, pos) {
             return pos
           },

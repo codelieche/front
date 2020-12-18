@@ -59,7 +59,19 @@ const navData = [
       {
         slug: 'custom/event',
         title: '添加事件'
-      }
+      },
+      {
+        slug: 'custom/shape',
+        title: '形状: shape'
+      },
+      {
+        slug: 'custom/nodeHtmlLabel',
+        title: 'nodeHtmlLabel'
+      },
+      {
+        slug: 'custom/weblink',
+        title: 'weblink'
+      },
     ].map(item => {
       return {
         icon: 'el-icon-arrow-right',
@@ -79,6 +91,8 @@ const navData = [
     level: 1,
     children: [
       { slug: 'demo/devops', title: 'DevOps' },
+      { slug: 'demo/bookstore', title: 'bookstore' },
+      { slug: 'demo/kiali', title: 'kiali' },
      
     ].map(item => {
       return {

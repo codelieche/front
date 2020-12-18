@@ -24,27 +24,46 @@ var subComponents = [
   'custom/classes',
   'custom/color',
   'custom/event',
+  {
+    path: 'custom/shape',
+    filename: 'custom/shape/index'
+  },
+  {
+    path: 'custom/nodeHtmlLabel',
+    filename: 'custom/nodeHtmlLabel/index'
+  },
+  {
+    path: 'custom/weblink',
+    filename: 'custom/weblink/index'
+  },
 
   // 示例
   {
     path: 'demo/devops',
     filename: 'demo/devops/index'
+  },
+  {
+    path: 'demo/bookstore',
+    filename: 'demo/bookstore/index'
+  },
+  {
+    path: 'demo/kiali',
+    filename: 'demo/kiali/index'
   }
 ]
 
 subComponents.forEach(item => {
-  if(typeof(item) === 'object'){
+  if (typeof item === 'object') {
     routes.push({
       path: item.path,
       component: () => import(`./${item.filename}.vue`)
     })
-  }else{
+  } else {
     routes.push({
       path: item,
       component: () => import(`./${item}.vue`)
     })
   }
-  
 })
 
 export default routes

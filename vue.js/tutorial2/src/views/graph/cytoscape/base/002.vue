@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Cytoscape from 'cytoscape'
+import cytoscape from 'cytoscape'
 // import canvas from 'cytoscape-canvas'
 // import cytoscapeCola from 'cytoscape-cola' // 推荐
 // import dagre from 'cytoscape-dagre' // 推荐
@@ -87,7 +87,7 @@ export default {
         this.cy = undefined
       }
 
-      var cy = (window.cy = Cytoscape({
+      var cy = (window.cy = cytoscape({
         container: document.getElementById('cy'),
         boxSelectionEnabled: false,
         style: [
