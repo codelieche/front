@@ -3,8 +3,8 @@ import {
     Container, Header, Aside, Main,
     Button,
     Form, FormItem,
-    Input, Radio, Checkbox,
-    Select, 
+    Input, Radio, Checkbox, CheckboxGroup, CheckboxButton,
+    Select, Option, OptionGroup,
     Message,
     Popover, Tooltip,
     Card, Divider,
@@ -24,7 +24,11 @@ Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Radio)
 Vue.use(Checkbox)
+Vue.use(CheckboxGroup)
+Vue.use(CheckboxButton)
 Vue.use(Select)
+Vue.use(Option)
+Vue.use(OptionGroup)
 Vue.use(Popover)
 Vue.use(Tooltip)
 Vue.use(Card)

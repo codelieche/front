@@ -34,6 +34,7 @@ export default {
     return {
       navs: [
         { slug: '/', title: '首页' },
+        { slug: '/base', title: '基础' },
         { slug: '/tutorial', title: 'Tutorial' },
         { slug: '/chart', title: '图标' },
         { slug: '/graph', title: '网络图' },

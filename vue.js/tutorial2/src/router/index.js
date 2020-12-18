@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // 引入子路曰
+import baseRoutes from '@/views/base/routes.js'
 import tutorialRoutes from '@/views/tutorial/routes.js'
 import userRoutes from '@/views/user/routes.js'
 import userLoginRoutes from '@/views/user/login/routes.js'
@@ -23,6 +24,13 @@ const routes = [
         component: () => import('@/views/home/home.vue')
       }
     ]
+
+  },
+  {
+    path: '/base',
+    // name: 'BaseIndex',
+    component: () => import('@/views/base/index.vue'),
+    children: baseRoutes
   },
 
   // 学习demo相关的路由

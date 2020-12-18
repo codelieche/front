@@ -45,6 +45,10 @@ var subComponents = [
   {
     path: 'demo/bookstore',
     filename: 'demo/bookstore/index'
+  },
+  {
+    path: 'demo/kiali',
+    filename: 'demo/kiali/index'
   }
 ]
 

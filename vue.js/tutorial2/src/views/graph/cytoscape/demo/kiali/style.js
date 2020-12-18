@@ -81,9 +81,13 @@ var styles = [
       //   label: 'data(app)',
       label: ele => {
         var data = ele.data()
+
         switch (data.nodeType) {
           case 'app':
             if (data.version) {
+              if (data.workload && !data.parent) {
+                return data.workload
+              }
               return data.version
             } else {
               return data.app
@@ -171,10 +175,17 @@ var styles = [
       'target-arrow-shape': 'vee',
       'line-color': '#999',
       width: '0.5px',
-      // label: 'data(label)',
-      label: '5ms',
+      // label: '5ms',
       color: '#999',
-      'font-size': 10
+      'font-size': 10,
+      label: ele => {
+        var data = ele.data()
+        if (data.responseTime) {
+          return data.responseTime + 'ms'
+        } else {
+          return ''
+        }
+      }
     }
   },
   {
@@ -184,12 +195,12 @@ var styles = [
       'target-arrow-color': '#3aa5dc',
       opacity: 0.8,
       width: '1.5px',
-      'font-size': 12,
+      'font-size': 10,
       'line-style': 'solid',
       'target-arrow-shape': 'vee',
-      color: '#595959',
-      'text-outline-color': '#595959',
-      'text-outline-width': '0.1px'
+      color: '#3aa5dc',
+      'text-outline-color': '#fff',
+      'text-outline-width': '0.5px'
     }
   },
   {

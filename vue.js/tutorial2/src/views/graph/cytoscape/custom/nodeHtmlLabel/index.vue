@@ -137,34 +137,71 @@ export default {
 
     // 非Group的
     span.shape {
-      width: 35px;
-      height: 35px;
+      // width: 35px;
+      // height: 35px;
       // border: 1px solid #fff;
-      border-radius: 3px;
+      // border-radius: 3px;
       display: block;
       span {
         display: inline-block;
       }
-      &:hover{
+      &:hover {
         opacity: 1;
       }
-    }
-    .service {
-      background: #595959;
-    }
+      // css各种形状
+      &.triangle-up,
+      &.service {
+        width: 0;
+        height: 0;
+        border-left: 17px solid transparent;
+        border-right: 17px solid transparent;
+        border-bottom: 34px solid #999;
+      }
 
-    .app {
-      background: #76a5fc;
-    }
+      &.app {
+        width: 34px;
+        height: 34px;
+        background: #76a5fc;
+        background-image: url(/img/pod.png);
+        background-position: 10px 10px;
+        background-size: 14px 14px;
+        background-repeat: no-repeat;
+        // background-image: url(/img/logos/desktop.png);
+        // // background-position: 10px 10px;
+        // background-size: 35px 35px;
+        // background-repeat: no-repeat;
+      }
 
-    .workload {
-      background: red;
-    }
-    .operation {
-      background: #3e3;
-    }
-    .serviceEntry {
-      background: orange;
+      &.workload {
+        width: 34px;
+        height: 34px;
+        height: 34px;
+        width: 34px;
+        background: red;
+        // background-image: url(/img/logos/kubernetes.png);
+        // // background-position: 10px 10px;
+        // background-size: 35px 35px;
+        // background-repeat: no-repeat;
+      }
+
+      &.operation {
+        width: 35px;
+        height: 35px;
+        background: #989898;
+        // background-image: url(/img/logos/mysql.svg);
+        // // background-position: 10px 10px;
+        // background-size: 35px 35px;
+        // background-repeat: no-repeat;
+      }
+      &.serviceEntry {
+        width: 35px;
+        height: 35px;
+        background: orange;
+        // background-image: url(/img/logos/docker.png);
+        // // background-position: 10px 10px;
+        // background-size: 35px 35px;
+        // background-repeat: no-repeat;
+      }
     }
   }
 }

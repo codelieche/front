@@ -27,7 +27,6 @@ var handleHoverEvents = cy => {
   })
   cy.on('mouseover', 'edge', function(evt) {
     var edge = evt.target
-    window.ddd = evt
     // edge.activate()
     edge.addClass('highlight')
     edge.source().addClass('highlight')

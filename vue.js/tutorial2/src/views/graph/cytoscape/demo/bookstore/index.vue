@@ -1,6 +1,17 @@
 <template>
   <div class="full">
-    <div class="title">综合示例:Bookstore</div>
+    <div class="title" @click="buildGraph">
+      综合示例:Bookstore
+      <el-button @click.prevent.stop="randomError('success')" type="text"
+        >随机成功</el-button
+      >
+      <el-button @click.prevent.stop="randomError('warn')" type="text"
+        >随机警告</el-button
+      >
+      <el-button @click.prevent.stop="randomError('error')" type="text"
+        >随机错误</el-button
+      >
+    </div>
     <div id="cy"></div>
     <el-dialog
       :visible.sync="showDialog"
@@ -122,7 +133,7 @@ export default {
         that.getElementNeighbordByID(id)
       })
     },
-    
+
     // 获取元素的邻居节点
     getElementNeighbordByID(id) {
       var ele = this.cy.$('#' + id)
@@ -171,6 +182,20 @@ export default {
       // window.location.reload();
     },
 
+    randomError(type = 'error') {
+      // 随机设置个error
+      if (this.cy) {
+        var edges = this.cy.edges()
+        var index = Math.floor(Math.random() * edges.length)
+        if (type === 'success') {
+          edges[index].removeClass('warn error')
+          edges[index].target().removeClass('warn error')
+        }
+        edges[index].addClass(type)
+        edges[index].target().addClass(type)
+      }
+    },
+
     destroyGraph() {
       if (this.cy) {
         this.cy.destroy()
@@ -189,9 +214,10 @@ export default {
     height: 35px;
     line-height: 35px;
     font-size: 18px;
-    font-weight: bolid;
+    font-weight: 500;
     color: #595959;
     border-bottom: 1px solid #eee;
+    cursor: pointer;
   }
   #cy {
     flex: 1;

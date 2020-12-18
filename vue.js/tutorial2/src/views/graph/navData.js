@@ -92,6 +92,7 @@ const navData = [
     children: [
       { slug: 'demo/devops', title: 'DevOps' },
       { slug: 'demo/bookstore', title: 'bookstore' },
+      { slug: 'demo/kiali', title: 'kiali' },
      
     ].map(item => {
       return {

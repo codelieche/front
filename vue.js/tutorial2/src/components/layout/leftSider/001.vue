@@ -76,6 +76,7 @@ export default {
       background: @left-sider-collapsed-toogle-background;
       line-height: 35px;
       cursor: pointer;
+      text-align: center;
       span {
         font-size: 20px;
         font-weight: normal;
