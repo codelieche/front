@@ -2,6 +2,14 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
-import store from './store'
+import { useElementPlugins } from './plugins/element'
+import './styles/main.less'
+import { stateSymbol, createState } from './store/headerSlug'
 
-createApp(App).use(store).use(router).mount('#app')
+
+const app = createApp(App)
+useElementPlugins(app)
+
+app.provide(stateSymbol, createState())
+
+app.use(router).mount('#app')

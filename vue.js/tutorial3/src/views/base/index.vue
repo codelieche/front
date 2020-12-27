@@ -1,4 +1,3 @@
-
 <template>
   <!-- 采用基础布局 -->
   <base-layout v-bind="layoutDisplay">
@@ -25,19 +24,20 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import BaseLayout from '@/components/layout/layout.vue'
 import Header001 from '@/components/layout/header/001.vue'
 import LeftSide001 from '@/components/layout/leftSider/001.vue'
-// import Footer001 from '@/components/layout/footer/001.vue'
+
+import useHeaderSlug from '@/hooks/store/useHeaderSlug'
 import navData from './navData'
 
-export default {
-  name: 'TutorialIndex',
+export default defineComponent({
+  name: 'BaseIndex',
   components: {
     BaseLayout,
     Header001,
     LeftSide001,
-    // Footer001,
   },
   props: {
     items: {
@@ -47,12 +47,14 @@ export default {
       },
     },
   },
-  mounted() {
-    this.$store.commit('updateHeaderSlug', '/tutorial')
+  setup() {
+    //  使用hooks，加载这个页面后，设置顶部的导航选中/base, 组件卸载的时候，重新设置为/
+    useHeaderSlug('/base', '/')
+    return {
+      //   updateHeaderSlug,
+    }
   },
-  beforeDestroy() {
-    this.$store.commit('updateHeaderSlug', '/')
-  },
+
   data() {
     return {
       // 采用一个通用的布局，然后传参来显示各个区域
@@ -73,5 +75,8 @@ export default {
       this.$router.push(data)
     },
   },
-}
+})
 </script>
+
+<style lang="less">
+</style>

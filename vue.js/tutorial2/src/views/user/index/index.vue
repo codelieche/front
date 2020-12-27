@@ -10,6 +10,13 @@ export default {
   components: {
     HomeIndex,
   },
+  mounted() {
+    this.$store.commit('updateHeaderSlug', '/user')
+    // this.$store.dispatch('updateHeaderSlugAsync', '/user')
+  },
+  beforeDestroy() {
+    this.$store.commit('updateHeaderSlug', '/')
+  },
   data() {
     return {
       layoutDisplay: {

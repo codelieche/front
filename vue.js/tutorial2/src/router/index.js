@@ -2,9 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // 引入子路曰
+import baseRoutes from '@/views/base/routes.js'
 import tutorialRoutes from '@/views/tutorial/routes.js'
 import userRoutes from '@/views/user/routes.js'
 import userLoginRoutes from '@/views/user/login/routes.js'
+import chartRoutes from '@/views/chart/routes.js'
+import graphRoutes from '@/views/graph/routes.js'
+import projectRoutes from '@/views/projects/routes.js'
 
 Vue.use(VueRouter)
 
@@ -15,12 +19,18 @@ const routes = [
     component: () => import('@/views/home/index.vue'),
     children: [
       {
-        path: "",
-        namee: "HomePage",
+        path: '',
+        name: 'HomePage',
         component: () => import('@/views/home/home.vue')
       }
-
     ]
+
+  },
+  {
+    path: '/base',
+    // name: 'BaseIndex',
+    component: () => import('@/views/base/index.vue'),
+    children: baseRoutes
   },
 
   // 学习demo相关的路由
@@ -55,7 +65,22 @@ const routes = [
     component: () => import('@/views/user/index/index.vue'),
     children: userRoutes
   },
-  
+  // 图表相关的路由
+  {
+    path: '/chart/',
+    component: () => import('@/views/chart/index.vue'),
+    children: chartRoutes
+  },
+  {
+    path: '/graph/',
+    component: () => import('@/views/graph/index.vue'),
+    children: graphRoutes
+  },
+  {
+    path: '/project/',
+    component: () => import('@/views/projects/index.vue'),
+    children: projectRoutes
+  }
 ]
 
 const router = new VueRouter({

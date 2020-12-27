@@ -1,9 +1,9 @@
 <template>
   <div class="header">
-    <router-link to="/" key="header-logo">
+    <router-link to="/" keey="header-logo">
       <div class="logo">
         <img src="@/assets/logo.png" alt="codelieche" />
-        <span> 编程教程 </span>
+        <span>编程教程</span>
       </div>
     </router-link>
 
@@ -15,35 +15,55 @@
             :class="{
               'router-link-exact-active': item.slug === headerSlug,
             }"
-            >{{ item.title }}</router-link>
+            >{{ item.title }}</router-link
+          >
         </li>
       </ul>
     </div>
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script lang="ts">
+import { defineComponent } from 'vue'
+// import { mapState } from 'vuex'
 
-export default {
+import { headerSlug } from '@/hooks/store/useHeaderSlug'
+import { PageHeaderNav } from '@/types/base/nav'
+
+export default defineComponent({
   name: 'Header001',
-  computed: {
-    ...mapState(['headerSlug']),
+  props: {
+    navs: {
+      type: Array,
+      default() {
+        let arr: Array<PageHeaderNav> = []
+        arr = [
+          { slug: '/', title: '首页' },
+          { slug: '/base', title: '基础' },
+          //   { slug: '/tutorial', title: 'Tutorial' },
+          //   { slug: '/chart', title: '图标' },
+          //   { slug: '/graph', title: '网络图' },
+          //   { slug: '/project', title: '项目' },
+          //   { slug: '/user', title: '用户' },
+        ]
+        return arr
+      },
+    },
   },
-  data() {
+  setup() {
+    // watch(
+    //   headerSlug,
+    //   () => {
+    //     console.log("headerSlug变化了", headerSlug)
+    //   },
+    //   { immediate: true, deep: true }
+    // )
+
     return {
-      navs: [
-        { slug: '/', title: '首页' },
-        { slug: '/base', title: '基础' },
-        { slug: '/tutorial', title: 'Tutorial' },
-        { slug: '/chart', title: '图标' },
-        { slug: '/graph', title: '网络图' },
-        { slug: '/project', title: '项目' },
-        { slug: '/user', title: '用户' },
-      ],
+      headerSlug,
     }
   },
-}
+})
 </script>
 
 <style lang="less" scoped>

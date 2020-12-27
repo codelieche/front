@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style>
+<style lang="less">
 body {
   width: 100%;
   scroll-behavior: smooth;
@@ -20,11 +20,12 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  // text-align: center;
   color: #2c3e50;
   height: 100vh;
 }
@@ -40,5 +41,14 @@ body {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.full {
+  width: 100%;
+  height: 100%;
+
+  canvas {
+    left: 0;
+  }
 }
 </style>
