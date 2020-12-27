@@ -18,9 +18,12 @@ const subComponents = [
   'checkbox/002',
   'checkbox/003',
 
+  // hooks
+  // 'hooks/mousePosition',
+
   {
-    path: 'custom/shape',
-    filename: 'custom/shape/index'
+    path: 'hooks/mousePosition',
+    filename: 'hooks/mousePosition'
   }
 ]
 

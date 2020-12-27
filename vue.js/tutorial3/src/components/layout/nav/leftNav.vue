@@ -4,38 +4,41 @@
     <div v-if="collapsed" class="title" @click="onTitleClick">
       <!-- 折叠的情况 -->
       <el-tooltip effect="dark" :content="item.title" placement="right">
-        <span v-if="item.is_link && item.link">
-          <!-- 是a连接 -->
-          <a
-            :href="item.link"
-            :target="item.target === '_blank' ? '_blank' : ''"
+        <div>
+          <!-- element-plus里面的元素需要一个root元素包裹 -->
+          <span v-if="item.is_link && item.link">
+            <!-- 是a连接 -->
+            <a
+              :href="item.link"
+              :target="item.target === '_blank' ? '_blank' : ''"
+              :style="{ paddingLeft: paddingLeftValue }"
+            >
+              <!-- 左侧显示icon -->
+              <span
+                class="icon"
+                :class="item.icon ? item.icon : 'el-icon-arrow-right'"
+              ></span>
+            </a>
+          </span>
+
+          <!-- 跳转内部Url的情况 -->
+          <router-link
+            v-else-if="!!item.slug"
+            :to="item.slug"
             :style="{ paddingLeft: paddingLeftValue }"
           >
-            <!-- 左侧显示icon -->
             <span
               class="icon"
               :class="item.icon ? item.icon : 'el-icon-arrow-right'"
             ></span>
-          </a>
-        </span>
+          </router-link>
 
-        <!-- 跳转内部Url的情况 -->
-        <router-link
-          v-else-if="!!item.slug"
-          :to="item.slug"
-          :style="{ paddingLeft: paddingLeftValue }"
-        >
           <span
+            v-else
             class="icon"
             :class="item.icon ? item.icon : 'el-icon-arrow-right'"
           ></span>
-        </router-link>
-
-        <span
-          v-else
-          class="icon"
-          :class="item.icon ? item.icon : 'el-icon-arrow-right'"
-        ></span>
+        </div>
       </el-tooltip>
       <!-- 折叠情况结束 -->
     </div>
@@ -113,9 +116,9 @@ export default {
     collapsed: Boolean, // 是否是折叠的
     openParentChildren: {
       type: Function,
-      default(){
+      default() {
         return null
-      }
+      },
     },
   },
   mounted() {

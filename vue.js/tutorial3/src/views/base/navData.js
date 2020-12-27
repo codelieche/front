@@ -1,6 +1,6 @@
 const navData = [
   {
-    icon: 'el-icon-s-promotion',
+    icon: 'el-icon-edit-outline',
     key: '/base/input/',
     // slug: '/base/input/',
     title: 'Input',
@@ -37,6 +37,29 @@ const navData = [
       {
         slug: 'checkbox/003',
         title: '示例003'
+      },
+    ].map(item => {
+      return {
+        icon: 'el-icon-arrow-right',
+        key: `/base/${item.slug}`,
+        slug: `/base/${item.slug}`,
+        title: item.title,
+        level: 2
+      }
+    })
+  },
+
+  // hooks
+  {
+    icon: 'el-icon-setting',
+    key: '/base/hooks',
+    // slug: '/base/',
+    title: 'hooks',
+    level: 1,
+    children: [
+      {
+        slug: 'hooks/mousePosition',
+        title: '鼠标位置'
       },
     ].map(item => {
       return {
