@@ -13,6 +13,14 @@
         <span class="el-icon-user-solid"></span>
       </div>
       <HelloWorld :msg="message" :callback="HelloWorldCallback" />
+
+      <Resizable :maxWidth="400" :minWidth="150">
+        <h1 :style="{background: '#eee'}">Resizable</h1>
+      </Resizable>
+
+      <Resizable :maxWidth="400" :minWidth="150">
+        <h1 :style="{background: '#eee'}">Resizable 002</h1>
+      </Resizable>
     </div>
   </div>
 </template>
@@ -20,11 +28,14 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
+import Resizable from '@/components/base/resizable.vue'
+import fetchApi from '@/api/fetchApi'
 
 export default {
   name: 'HomePage',
   components: {
     HelloWorld,
+    Resizable,
   },
   mounted() {
     this.$store.commit('updateHeaderSlug', '/')
@@ -38,11 +49,29 @@ export default {
     HelloWorldCallback() {
       console.log('callback:')
       console.log(this.$router);
+      console.log(this.$router.currentRoute);
       if (this.message.indexOf('Vue') >= 0) {
         this.message = '你好！Callback'
       } else {
         this.message = '你好！Vue.js'
       }
+      // 发起ajax请求
+      // fetchApi.get('/api/v1/account/login')
+      fetchApi.get('/api/v1/account/login')
+        .then(response => {
+          console.log(response.data)
+        })
+          .catch(err => {
+            console.log(err)
+          })
+      
+      fetchApi.post('/api/v1/account/login', {'ddd': 'good'})
+        .then(response => {
+          console.log(response.data)
+        })
+          .catch(err => {
+            console.log(err)
+          })
     },
   },
 }

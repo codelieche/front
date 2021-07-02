@@ -18,6 +18,10 @@ var subComponents = [
   'checkbox/002',
   'checkbox/003',
 
+  // Table
+  'table/001',
+  'table/002',
+
   {
     path: 'custom/shape',
     filename: 'custom/shape/index'

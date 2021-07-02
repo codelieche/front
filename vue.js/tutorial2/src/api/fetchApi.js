@@ -1,9 +1,10 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import Axios from 'axios'
 import qs from 'qs'
+import config from '@/config/'
 
 // 发起fetch请求时候的url前缀
-const apiBaseUrl = 'http://127.0.0.1:9000'
+const apiBaseUrl = config.apiBaseUrl
 // const apiBaseUrl = 'https://kanban.codelieche.com'
 //  发起api请求的超时时间
 const apiFetchTimeout = 20000
@@ -104,7 +105,4 @@ api.interceptors.response.use(
   }
 )
 
-Vue.prototype.$http = api
-
-// export default api;
-
+export default api;

@@ -1,26 +1,37 @@
 <template>
-  <div class="left-sider" :class="{ collapsed: collapsed }" key="left-sider">
-    <div class="header" @click="handleCollapseedToogle">
-      <div class="collapsed-toogle">
-        <span :class="collapsed ? 'el-icon-s-unfold' : 'el-icon-s-fold'"></span>
+  <Resizeable
+    :minWidth="collapsed ? 65 : 156"
+    :maxWidth="400"
+    :disabled="collapsed"
+    :defaultWidth="defaultWidth"
+    :afterSizeChange="afterSizeChange"
+  >
+    <div class="left-sider" :class="{ collapsed: collapsed }" key="left-sider">
+      <div class="header" @click="handleCollapseedToogle">
+        <div class="collapsed-toogle">
+          <span
+            :class="collapsed ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
+          ></span>
+        </div>
       </div>
+      <div class="content">
+        <LeftNavItem
+          v-for="(item, index) in items"
+          :item="item"
+          :index="index"
+          :key="index"
+          :collapsed="collapsed"
+        ></LeftNavItem>
+      </div>
+      <!-- <div class="footer"></div> -->
     </div>
-    <div class="content">
-      <LeftNavItem
-        v-for="(item, index) in items"
-        :item="item"
-        :index="index"
-        :key="index"
-        :collapsed="collapsed"
-      ></LeftNavItem>
-    </div>
-    <!-- <div class="footer"></div> -->
-  </div>
+  </Resizeable>
 </template>
 
 <script>
 import navData from '../nav/NavData.js'
 import LeftNavItem from '../nav/leftNav'
+import Resizeable from '@/components/base/resizable.vue'
 
 export default {
   name: 'LeftSider001',
@@ -34,18 +45,43 @@ export default {
   },
   components: {
     LeftNavItem,
+    Resizeable,
   },
 
   // 数据
   data() {
+    // 从localStorage中获取宽度
+    let defaultWidth = 200
+    const widthValue = localStorage.getItem('leftSiderWidth')
+    if (widthValue) {
+      try {
+        const result = parseInt(widthValue)
+        // console.log(widthValue, isNaN(widthValue), typeof widthValue, result);
+        if (result) {
+          defaultWidth = result >= 156 && result <= 460 ? result : 240
+        } else {
+          defaultWidth = 240
+        }
+      } catch (error) {
+        console.log('获取宽度出错：', error)
+      }
+    }
+
     return {
       // items: navData,
       collapsed: false,
+      defaultWidth,
     }
   },
   methods: {
     handleCollapseedToogle() {
       this.collapsed = !this.collapsed
+    },
+    // 尺寸变更后修改
+    afterSizeChange: function (width) {
+      this.defaultWidth = width
+      // console.log('afterSizeChange2', width, this)
+      localStorage.setItem('leftSiderWidth', width.toString())
     },
   },
 }
@@ -58,7 +94,7 @@ export default {
 
 .left-sider {
   overflow: auto;
-  width: 200px;
+  // width: 200px;
   &.collapsed {
     width: 65px;
   }
