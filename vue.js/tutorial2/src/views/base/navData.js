@@ -48,6 +48,26 @@ const navData = [
       }
     })
   },
+
+  {
+    icon: 'el-icon-s-promotion',
+    key: '/base/table/',
+    // slug: '/base/table/',
+    title: 'Table',
+    level: 1,
+    children: [
+      { slug: 'table/001', title: '示例001' },
+      { slug: 'table/002', title: '示例002' },
+    ].map(item => {
+      return {
+        icon: 'el-icon-arrow-right',
+        key: `/base/${item.slug}`,
+        slug: `/base/${item.slug}`,
+        title: item.title,
+        level: 2
+      }
+    })
+  },
   
 ]
 
