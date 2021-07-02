@@ -1,17 +1,22 @@
 <template>
-  <div>
+  <div class="base-list">
     <Row class="tools" v-if="showTools">
-      <Col span="12">
-        <Input
-          class="search primary"
-          v-model="searchInputValue"
-          placeholder="search"
-          size="default"
-          :clearable="true"
-          :search="true"
-          @on-search="handleSearchChange"
-        />
-      </Col>
+      <slot name="leftButons">
+        <Col span="12">
+          <Input
+            class="search primary"
+            v-model="searchInputValue"
+            placeholder="search"
+            size="default"
+            :clearable="true"
+            :search="true"
+            @on-search="handleSearchChange"
+          />
+        </Col>
+      </slot>
+      <!-- <Col span="12"> -->
+      <slot name="rightButtons" :dataSource="dataSource"></slot>
+      <!-- </Col> -->
     </Row>
     <slot name="default" :dataSource="dataSource"></slot>
     <Page
@@ -20,21 +25,22 @@
       :page-size="pageInfo.pageSize"
       :show-total="true"
       :show-sizer="true"
+      :show-elevator="true"
       @on-change="onPageChange"
       @on-page-size-change="onPageSizeChange"
     >
     </Page>
 
-    {{ apiUrl }}
+    <!-- {{ apiUrl }}
     <hr />
     {{ pageInfo }}
-    <hr>
+    <hr /> -->
   </div>
 </template>
 
 <script>
 import { getParamsFromLocationSearch } from '@/utils/urlParam.js'
-import fetchListDataMixins from '@/components/page/fetchListDataMixins'
+import fetchListDataMixins from '@/components/page/baseList/fetchListDataMixins'
 
 export default {
   name: 'BaseList',
@@ -189,7 +195,7 @@ export default {
         this.params['page'] = 1
         this.params['search'] = value
         for (const key in this.params) {
-          if (this.params[key] === undefined) {
+          if (this.params[key] === undefined || this.params[key] === '') {
             delete this.params[key]
           }
         }
@@ -219,7 +225,10 @@ export default {
     // 每页大小变更
     onPageSizeChange: function (pageSize) {
       // console.log('onPageSizeChange', pageSize, this.pageInfo)
-      if (pageSize > this.pageInfo.pageSize && pageSize * this.pageInfo.currentPage > this.count) {
+      if (
+        pageSize > this.pageInfo.pageSize &&
+        pageSize * this.pageInfo.currentPage > this.count
+      ) {
         // this.pageInfo.currentPage = 1
         this.pageInfo.pageSize = pageSize
         this.onPageChange(1)
@@ -269,12 +278,12 @@ export default {
         this.handleSearchChange('')
       }
     },
-    reFreshTimes: function(){
+    reFreshTimes: function () {
       this.fetchListData()
     },
-    '$router': function(){
+    $router: function () {
       console.log('currentRoute:', this.currentRoute)
-    }
+    },
   },
 }
 </script>

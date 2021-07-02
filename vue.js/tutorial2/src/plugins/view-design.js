@@ -4,6 +4,7 @@ import {
     Button, 
     Card,
     Input,
+    Checkbox,
     Table,
     Page,
     Switch,
@@ -16,6 +17,7 @@ Vue.component('Col', Col);
 Vue.component('Button', Button);
 Vue.component('Card', Card);
 Vue.component('Input', Input);
+Vue.component('Checkbox', Checkbox);
 Vue.component('Table', Table);
 Vue.component('Page', Page);
 Vue.component('ISwitch', Switch);

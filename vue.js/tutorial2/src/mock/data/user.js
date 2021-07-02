@@ -23,13 +23,15 @@ const userLoginResponse2 = {
 // 用户列表数据
 const userListResponse = {
   count: 1000,
-  'results|10': [
+  'results|15': [
     {
       id: '@id',
       username: '@first@last',
       nick_name: '@cname',
       is_superuser: '@boolean',
-      email: '@email'
+      phone: '@phone',
+      email: '@email',
+      city: '@city'
     }
   ]
 }

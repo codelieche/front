@@ -4,6 +4,7 @@
     <BaseList
       apiUrlPrefix="/api/v1/account/user/list"
       pageUrlPrefix="/base/table/001"
+      :reFreshTimes="reFreshTimes"
       :showTools="true"
     >
       <template v-slot:default="data">
@@ -14,13 +15,26 @@
         </Table>
         <!-- <Divider></Divider> -->
       </template>
+
+      <!-- 右上角按钮 -->
+      <template v-slot:rightButtons>
+        <Col span="12" class-name="right">
+          <Button @click="reFreshTimes++" size="default">
+            <Icon type="ivu-icon ivu-icon-ios-refresh">刷新</Icon>
+          </Button>
+
+          <Button @click="reFreshTimes++" type="primary">
+            <Icon type="ivu-icon ivu-icon-md-add">添加</Icon>
+          </Button>
+        </Col>
+      </template>
     </BaseList>
     <Switch size="large" />
   </div>
 </template>
 
 <script>
-import BaseList from '@/components/page/baseList.vue'
+import BaseList from '@/components/page/baseList/index.vue'
 
 export default {
   name: 'Table001',
@@ -29,10 +43,17 @@ export default {
   },
   data() {
     return {
+      reFreshTimes: 0,
       columns: [
+        {
+          type: 'selection',
+          width: 60,
+          align: 'center',
+        },
         { title: 'ID', key: 'id' },
         { title: 'Username', key: 'username' },
         { title: '昵称', key: 'nick_name' },
+        { title: '电话', key: 'phone' },
         { title: '邮箱', key: 'email' },
         {
           title: '管理员',

@@ -38,8 +38,23 @@ a {
   transition: color 0.3s;
   -webkit-text-decoration-skip: objects;
 }
+.right {
+  text-align: right;
+}
+.padding-20 {
+  padding: 20px;
+}
+.container .main .title h4 {
+  line-height: 18px;
+  border-left: 2px solid #1890ffd4;
+  padding-left: 10px;
+  color: #444;
+}
 .container .full .top-bar {
   padding: 3px 0;
   border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+.tools {
   margin-bottom: 10px;
 }
