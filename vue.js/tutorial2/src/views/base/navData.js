@@ -69,6 +69,28 @@ const navData = [
       }
     })
   },
+
+  // 内容布局
+  {
+    icon: 'el-icon-s-promotion',
+    key: '/base/content/',
+    // slug: '/base/content/',
+    title: 'Content',
+    level: 1,
+    children: [
+      { slug: 'content/001', title: '示例001' },
+      { slug: 'content/002', title: '示例002' },
+      { slug: 'content/003', title: '示例003' },
+    ].map(item => {
+      return {
+        icon: 'el-icon-arrow-right',
+        key: `/base/${item.slug}`,
+        slug: `/base/${item.slug}`,
+        title: item.title,
+        level: 2
+      }
+    })
+  },
   
 ]
 

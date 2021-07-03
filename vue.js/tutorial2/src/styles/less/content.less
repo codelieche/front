@@ -7,6 +7,7 @@
     font-size: 16;
   }
   .full {
+    height: 100%;
     .top-bar {
       // height: 26px;
       // line-height: 26px;
@@ -14,5 +15,100 @@
       border-bottom: 1px solid #eee;
       margin-bottom: 15px;
     }
+  }
+}
+
+// 基础布局内容
+.base-content {
+  height: 100%;
+  margin: 16px;
+  background-color: #fff;
+  max-height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+
+  // 头部样式
+  & > .ivu-card-head {
+    padding: 0 16px;
+  }
+  & > .ivu-card-head > .header {
+    height: 60px;
+    position: relative;
+    overflow: hidden;
+    .title {
+      height: 100%;
+      float: left;
+      & > .back,
+      & > h2,
+      & > .ivu-divider {
+        display: inline-block;
+        // height: 100%;
+      }
+      // 返回按钮
+      .back {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.16);
+        margin-right: 16px;
+        margin-left: 5px;
+        cursor: pointer;
+        z-index: 100;
+        i {
+          line-height: 28px;
+          color: @PRIMARY_COLOR;
+          font-size: 20px;
+        }
+      }
+      // 标题
+      h2 {
+        text-align: left;
+        white-space: nowrap;
+        color: #262626;
+        line-height: 60px;
+        font-size: 16px;
+      }
+      & > .ivu-divider {
+        margin-right: 20px;
+      }
+    }
+    .tabs {
+      // display: inline-block;
+      float: left;
+      .ivu-tabs-bar {
+        margin-bottom: 0;
+      }
+      .ivu-tabs-nav {
+        overflow: hidden;
+        margin-bottom: 0;
+        padding-top: 13px;
+        padding-bottom: 12px;
+        .ivu-tabs-tab {
+          padding: 8px 2px;
+          color: #999;
+          &.ivu-tabs-tab-active {
+            color: #333;
+          }
+        }
+      }
+    }
+    .tools {
+      float: right;
+      text-align: right;
+      line-height: 60px;
+      height: 60px;
+      white-space: nowrap;
+      button + button {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  &::-webkit-scrollbar,
+  &::-webkit-scrollbar-thumb {
+    width: 4px;
+    // background-color: #333;
+    background-color: rgba(0, 0, 0, 0.18);
   }
 }

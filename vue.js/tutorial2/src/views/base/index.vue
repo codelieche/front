@@ -73,7 +73,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 // 全局使用
 .full {
   display: flex;
