@@ -2,13 +2,15 @@
 // GET: /api/v1/account/login
 
 // 设置个开关，模块是否使用Mock拦截，模拟数据
-const toogle = true
+let toogle = true
+// toogle = false
 
 const userLoginResponse = {
   id: '@id',
   username: '@first@last',
   nick_name: '@cname',
   is_superuser: '@boolean',
+  is_active: '@boolean',
   guid: '@guid'
 }
 
@@ -16,6 +18,7 @@ const userLoginResponse2 = {
   id: '@uuid',
   username: '@first@last',
   nick_name: '@cname',
+  is_active: '@boolean',
   status: '@boolean',
   message: '登录成功'
 }
@@ -23,12 +26,13 @@ const userLoginResponse2 = {
 // 用户列表数据
 const userListResponse = {
   count: 1000,
-  'results|15': [
+  'results|10': [
     {
       id: '@id',
       username: '@first@last',
       nick_name: '@cname',
       is_superuser: '@boolean',
+      is_active: '@boolean',
       phone: '@phone',
       email: '@email',
       city: '@city'
@@ -51,7 +55,7 @@ let datasource = [
     toogle: true
   },
   {
-    path: '/api/v1/account/user/list',
+    path: '/api/v1/account/user/',
     method: 'get',
     data: userListResponse,
     toogle: true

@@ -21,6 +21,7 @@ var subComponents = [
   // Table
   'table/001',
   'table/002',
+  'table/003',
 
   {
     path: 'custom/shape',

@@ -1,28 +1,25 @@
 <template>
   <!-- Tools下面的表格 -->
-  <BaseList v-bind="propsFields" :urlParams="params">
+  <BaseList v-bind="propsFields">
     <template v-slot:default="data">
       <Table
         :columns="columns"
         :data="data.dataSource"
         :show-header="showHeader"
-        @sort-change="handleSortChange"
+        @on-sort-change="handleSortChange"
+        @on-selection-change="handleSelectionChange"
         v-bind="props"
       >
         <!-- <template  slot-scope="{ row }" slot="is_superuser"> -->
-        <template v-for="item in columnSlots"  slot-scope="{ row, column, index }" :slot="item" @key="item">
+        <template
+          v-for="item in columnSlots"
+          slot-scope="{ row, column, index }"
+          :slot="item"
+          @key="item"
+        >
           <!-- <ISwitch :value="row.is_superuser" v-bind:key="item"></ISwitch> -->
           <slot :name="item" :row="row" :column="column" :index="index"></slot>
         </template>
-
-        <!-- <template
-          v-for="item in columnSlots"
-          :name="item"
-          slot-scope="{ row }"
-          @key="item"
-        >
-          {{ row }}
-        </template> -->
       </Table>
     </template>
 
@@ -89,32 +86,64 @@ export default {
       default: () => '',
     },
     props: Object,
+    onSelectionChange: Function, // 当表格行被选择的时候触发
   },
   data: function () {
-    return {
-      params: {},
-    }
+    return {}
   },
   //   mounted(){
   //       console.log(this)
   //   },
   methods: {
-    handleSortChange: function (v) {
-      console.log('base table handle sort change: ', v)
+    handleSortChange(data) {
+      //   console.log('base table handle sort change: ', data)
+      let ordering = data.order === 'desc' ? `-${data.key}` : `${data.key}`
+      if (data.order === 'normal') {
+        ordering = ''
+      }
+
+      const query = this.$router.currentRoute.query
+      //   console.log(this.$router.currentRoute)
+      if (query['ordering'] !== ordering) {
+        this.$router.push({
+          path: this.$router.currentRoute.path,
+          query: {
+            ...query,
+            ordering,
+          },
+        })
+      }
     },
-  },
-  watch: {
-    urlParams: function () {
-      for (const key in this.urlParams) {
-        if (this.params[key] !== this.urlParams[key]) {
-          this.params[key] = this.urlParams[key]
-        }
+    // 选择行时触发
+    handleSelectionChange(rows) {
+      if (
+        this.onSelectionChange &&
+        typeof this.onSelectionChange === 'function'
+      ) {
+        this.onSelectionChange(rows)
+      } else {
+        console.log('handleSelectionChange:', rows)
       }
     },
   },
+  watch: {
+    // urlParams: function () {
+    //   for (const key in this.urlParams) {
+    //     if (this.params[key] !== this.urlParams[key]) {
+    //       this.params[key] = this.urlParams[key]
+    //     }
+    //   }
+    // },
+  },
   computed: {
     propsFields: function () {
-      return this.$props
+      const props = {}
+      for (const key in this.$props) {
+        if (['columnSlots', 'columns', 'onSelectionChange'].indexOf(key) < 0) {
+          props[key] = this.$props[key]
+        }
+      }
+      return props
     },
   },
 }

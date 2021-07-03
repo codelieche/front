@@ -1,9 +1,9 @@
 <template>
   <div class="full">
-    <TopBar title="表单基本使用002" />
+    <TopBar title="表单基本使用003" />
     <BaseTable
-      apiUrlPrefix="/api/v1/account/user/"
-      pageUrlPrefix="/base/table/002"
+      apiUrlPrefix="/api/v1/docs/article/list"
+      pageUrlPrefix="/base/table/003"
       :reFreshTimes="reFreshTimes"
       :showTools="true"
       :columns="columns"
@@ -11,15 +11,14 @@
       :props="tableProps"
       :onSelectionChange="onSelectionChange"
     >
-      <template v-slot:is_superuser="data">
-        <!-- <ISwitch :value="data.row.is_superuser"></ISwitch> -->
-        <!-- <Checkbox :value="data.row.is_superuser">管理员</Checkbox> -->
-        <Button
-          :type="data.row.is_superuser ? 'primary' : 'default'"
-          size="small"
-        >
-          {{ data.row.is_superuser ? '管理人员' : '普通用户' }}
-        </Button>
+      <template v-slot:cover="data">
+        <div v-if="data.row.cover">
+          <img
+            :src="data.row.cover"
+            :style="{ height: '30px', width: 'auto' }"
+          />
+        </div>
+        <div v-else></div>
       </template>
 
       <!-- 右上角按钮 -->
@@ -52,35 +51,46 @@ export default {
     }
     return {
       reFreshTimes: 0,
-      columnSlots: ['is_superuser'],
+      columnSlots: ['cover'],
       columns: [
         {
           type: 'selection',
           width: 60,
           align: 'center',
         },
-        { title: 'ID', key: 'id', width: 180, align: 'center', sortable: true },
         {
-          title: 'Username',
-          key: 'username',
-          width: 150,
+          title: 'ID',
+          key: 'id',
+          width: 80,
           align: 'center',
           sortable: 'custom',
         },
-        { title: '昵称', key: 'nick_name', width: 150, align: 'center' },
         {
-          title: '电话',
-          key: 'phone',
-          width: 160,
+          title: '标题',
+          key: 'title',
+          width: 200,
+          align: 'left',
+          sortable: 'custom',
+        },
+        { title: '用户', key: 'user', width: 150, align: 'center' },
+        {
+          title: '添加时间',
+          key: 'time_added',
+          width: 180,
           align: 'center',
           sortable: 'custom',
         },
-        { title: '邮箱', key: 'email', width: 160, align: 'center' },
-        { title: '城市', key: 'city', width: 160, align: 'center' },
+        {
+          title: '更新时间',
+          key: 'time_updated',
+          width: 180,
+          align: 'center',
+          sortable: 'custom',
+        },
         {
           title: '状态',
           key: 'is_active',
-          width: 80,
+          width: 100,
           align: 'center',
           sortable: 'custom',
           render: (h, params) => {
@@ -94,14 +104,22 @@ export default {
           },
         },
         {
-          title: '管理员',
-          key: 'is_superuser',
-          slot: 'is_superuser',
+          title: '海报图',
+          key: 'cover',
+          slot: 'cover',
           align: 'center',
-          // width: '160'
+          //   width: '160'
           // render: (h, params) => {
           //   return h('span', params.row.is_superuser)
           // },
+        },
+        {
+          title: '描述',
+          key: 'description',
+          align: 'left',
+          render: (h, params) => {
+            return h('div', { class: 'max-lines-3' }, params.row.description)
+          },
         },
       ],
       tableProps,
