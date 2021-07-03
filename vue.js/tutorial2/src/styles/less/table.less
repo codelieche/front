@@ -15,6 +15,14 @@
 
   .ivu-page {
     margin: 10px 0;
+    .ivu-page-item-active {
+      background-color: #2d8cf0;
+      border-color: #fff;
+      a {
+        color: #fff;
+      }
+      color: #fff;
+    }
   }
 }
 
@@ -25,8 +33,61 @@
     font-weight: 500;
     color: #333;
     border-radius: 8px;
+    // 表格顶部标题的背景颜色
+    thead tr th {
+      background-color: #eaedf1;
+
+      // 当尺寸变小，标题会自动换行
+      .ivu-table-cell {
+        max-height: 40px;
+        // overflow-y: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
   }
-//   .ivu-table-body {
-//       min-height: 350px;
-//   }
+  .ivu-table-body {
+    //   min-height: 350px;
+    .status {
+      margin: 0 5px;
+      i {
+        font-weight: bold;
+      }
+      i.check,
+      i.close {
+        padding: 3px;
+        color: #fff;
+        border-radius: 5px;
+      }
+      i.check {
+        background-color: #18a75f;
+      }
+      i.close {
+        // cursor: not-allowed;
+        background-color: #f56c6c;
+        &.grey {
+          background-color: #d4d6d8;
+        }
+      }
+    }
+  }
 }
+
+.ivu-table-body {
+  // 表格的滑动条样式
+  &::-webkit-scrollbar {
+    height: 4px;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.28);
+  }
+}
+
+// 表格底部的横线
+// .ivu-table.ivu-table-default {
+//     &::before{
+//         // height: 0;
+//         background-color: #fff;
+//     }
+// }

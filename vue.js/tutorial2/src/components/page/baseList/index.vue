@@ -33,7 +33,7 @@
 
     <!-- {{ apiUrl }}
     <hr />
-    {{ pageInfo }}
+    {{ pageInfo }} - {{ urlParams }} - {{ params }}
     <hr /> -->
   </div>
 </template>
@@ -78,7 +78,10 @@ export default {
       default: () => true,
     },
     // 当调用BaseList的上级组件，想要修改params的时候，就传递这个
-    urlParams: Object,
+    urlParams: {
+      type: Object,
+      default: () => {},
+    },
     rowKey: String,
     props: Object,
   },
@@ -200,11 +203,11 @@ export default {
           }
         }
         // 跳转新的页面
-        // this.$router.push({
-        //   path: this.$router.currentRoute.path,
-        //   query: this.params,
-        // })
-        this.changePageUrl()
+        this.$router.push({
+          path: this.$router.currentRoute.path,
+          query: this.params,
+        })
+        // this.changePageUrl()
       }
     },
 
@@ -265,9 +268,9 @@ export default {
       }
       this.$router.push(pageUrl).then(() => {
         // console.log("我跳转完毕了")
-        // 跳转完毕后重新获取url
-        this.apiUrl = this.getApiUrl()
-        this.fetchListData()
+        // 跳转完毕后重新获取url: 因为添加了watch.$route就无需刷新数据了
+        // this.apiUrl = this.getApiUrl()
+        // this.fetchListData()
       })
     },
   },
@@ -281,9 +284,44 @@ export default {
     reFreshTimes: function () {
       this.fetchListData()
     },
-    $router: function () {
-      console.log('currentRoute:', this.currentRoute)
+    // 上级传递的urlParams变更的时候，需要刷新网页，比如表格排序了
+    urlParams: {
+      handler: function (newValue) {
+        // console.log('base list urlParams watch:', this.urlParams, newValue, oldValue)
+        let needRedirect = false
+        for (const key in newValue) {
+          if (this.params[key] !== newValue[key]) {
+            if (this.apiUrl !== '') {
+              needRedirect = true
+            }
+            if (key === 'page') {
+              continue
+            }
+            this.params[key] = newValue[key].toString()
+            if ([null, '', undefined].indexOf(newValue[key]) >= 0) {
+              delete this.props[key]
+            }
+          }
+        }
+        // 是否需要跳转页面
+        if (needRedirect) {
+          this.changePageUrl()
+        }
+      },
+      deep: true,
     },
+    
+    $route(to, from){
+      // 监控路由变化
+      // console.log('路由变化:', this.$router.currentRoute)
+      // console.log(to, from)
+      if(to.path === from.path){
+        // 更新了query咯
+        this.apiUrl = this.getApiUrl()
+        // console.log('更新数据：', this.apiUrl)
+        this.fetchListData()
+      }
+    }
   },
 }
 </script>
