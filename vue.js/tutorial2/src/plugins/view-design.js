@@ -9,6 +9,8 @@ import {
     Page,
     Switch,
     Divider,
+    Tabs,
+    TabPane,
 } from 'view-design';
 import Vue from 'vue'
 
@@ -22,4 +24,6 @@ Vue.component('Table', Table);
 Vue.component('Page', Page);
 Vue.component('ISwitch', Switch);
 Vue.component('Divider', Divider);
+Vue.component('Tabs', Tabs);
+Vue.component('TabPane', TabPane);
 

@@ -23,6 +23,11 @@ var subComponents = [
   'table/002',
   'table/003',
 
+  // Content
+  'content/001',
+  'content/002',
+  'content/003',
+
   {
     path: 'custom/shape',
     filename: 'custom/shape/index'

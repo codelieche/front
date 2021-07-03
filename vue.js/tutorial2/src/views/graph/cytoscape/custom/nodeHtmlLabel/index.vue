@@ -113,7 +113,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .full {
   display: flex;
   flex-direction: column;
