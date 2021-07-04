@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import BaseList from '@/components/page/baseList/index.vue'
+import BaseList from '@/components/page/baseList/'
 
 export default {
   name: 'Table001',

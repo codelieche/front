@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import Icon from '@/components/base/icon/index.vue'
+import Icon from '@/components/base/icon/'
 
 export default {
   name: 'BaseContentHeader',

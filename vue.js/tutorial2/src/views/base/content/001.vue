@@ -14,7 +14,7 @@
 
       <!-- 默认 -->
       <template #default="{ activeTab }">
-        <BaseTable001 />
+        <TableDemo />
         <div>
           {{ activeTab }}
         </div>
@@ -26,13 +26,13 @@
 <script>
 import BaseContent from '@/components/layout/content/base.vue'
 
-import BaseTable001 from '../table/001.vue'
+import TableDemo from '../table/demo.vue'
 
 export default {
   name: 'BaseContentDemo001',
   components: {
     BaseContent,
-    BaseTable001,
+    TableDemo,
   },
   data() {
     return {

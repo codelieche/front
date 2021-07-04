@@ -12,13 +12,18 @@
       >
         <!-- <template  slot-scope="{ row }" slot="is_superuser"> -->
         <template
-          v-for="item in columnSlots"
+          v-for="item in columns.filter((i) => !!i.slot)"
           slot-scope="{ row, column, index }"
-          :slot="item"
+          :slot="item.slot"
           @key="item"
         >
           <!-- <ISwitch :value="row.is_superuser" v-bind:key="item"></ISwitch> -->
-          <slot :name="item" :row="row" :column="column" :index="index"></slot>
+          <slot
+            :name="item.slot"
+            :row="row"
+            :column="column"
+            :index="index"
+          ></slot>
         </template>
       </Table>
     </template>
@@ -32,7 +37,7 @@
 </template>
 
 <script>
-import BaseList from '@/components/page/baseList/index.vue'
+import BaseList from '@/components/page/baseList/'
 
 export default {
   name: 'BaseTable',
@@ -42,12 +47,16 @@ export default {
   props: {
     apiUrlPrefix: String, // 获取数据的接口：/api/v1/account/group/list
     // apiUrlSuffix: String,  // 获取数据的接口追加的内容，比如： type=default
-    pageUrlPrefix: String, // 页面的前缀：eg：/user/group/list
-    columnSlots: {
-      type: Array,
-      default: () => [],
+    pageUrlPrefix: {
+      // 页面的前缀：eg：/user/group/list
+      type: String,
+      default: function () {
+        // 这样如果BaseTable未传递pageUrl系统也是会选中当前的path
+        return this.$router.currentRoute.path
+      },
     },
     columns: {
+      // Column中如果有slot字段，那么就采用传入的slot，一般slot和name是相同名字
       type: Array,
       default: () => [],
     },

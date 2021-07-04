@@ -7,7 +7,6 @@
       :reFreshTimes="reFreshTimes"
       :showTools="true"
       :columns="columns"
-      :columnSlots="columnSlots"
       :props="tableProps"
       :onSelectionChange="onSelectionChange"
     >
@@ -39,7 +38,7 @@
 </template>
 
 <script>
-import BaseTable from '@/components/page/baseTable/index.vue'
+import BaseTable from '@/components/page/baseTable/'
 
 export default {
   name: 'Table001',
@@ -52,7 +51,6 @@ export default {
     }
     return {
       reFreshTimes: 0,
-      columnSlots: ['is_superuser'],
       columns: [
         {
           type: 'selection',

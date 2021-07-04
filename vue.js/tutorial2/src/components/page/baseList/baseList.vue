@@ -28,6 +28,7 @@
       :show-elevator="true"
       @on-change="onPageChange"
       @on-page-size-change="onPageSizeChange"
+      v-if="showPagination"
     >
     </Page>
 

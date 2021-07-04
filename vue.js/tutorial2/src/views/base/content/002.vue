@@ -20,18 +20,67 @@
       <template v-slot:tabContent="{ activeTab: activeTab }">
         <div>
           当前选中的Tab为：{{ activeTab }}
-          <div v-if="activeTab === '基本信息'">你好我是基本信息</div>
+          <div v-if="activeTab === 'base'">你好我是基本信息</div>
+          <Divider></Divider>
         </div>
       </template>
 
       <!-- 默认 -->
       <template #default="{ activeTab }">
-        <TopBar title="表单基本使用001" />
-        <h1>Good</h1>
-        <p style="height: 100px; background: #eee">wode test</p>
-        <p style="height: 100px; background: #999">wode test {{ activeTab }}</p>
+        <!-- 列表页 -->
+        <TableDemo
+          v-if="activeTab === 'list'"
+          :showTitle="false"
+          :showPagination="false"
+        />
+        <BaseInfo
+          title="基本信息"
+          :data="data"
+          :columns="infoColumns"
+          :showBorder="activeTab === 'base'"
+          :leftWidth="100"
+          v-else-if="activeTab === 'info' || activeTab === 'base'"
+        >
+          <!-- 状态 -->
+          <template v-slot:status="{ data }">
+            <div class="status">
+              <!-- {{ data }} -->
+              <Icon
+                :type="`ivu-icon ivu-icon-${
+                  data.status ? 'md-checkmark check' : 'md-close close'
+                }`"
+              >
+              </Icon>
+              <Icon
+                :type="`ivu-icon ivu-icon-${
+                  !data.status ? 'md-checkmark check' : 'md-close close'
+                }`"
+              >
+              </Icon>
+              <Icon type="ivu-icon ivu-icon-md-close close grey"> </Icon>
+            </div>
+          </template>
 
-        <div>good this is default slot content.</div>
+          <!-- Logoo -->
+          <template v-slot:logo="{ data }">
+            <img
+              :src="data.logo"
+              alt="Logo"
+              style="background: #4a90e2; padding: 30px 10px; width: 170px; border-radius: 8px;"
+            />
+          </template>
+        </BaseInfo>
+
+        <div v-else>
+          <TopBar title="表单基本使用001" />
+          <h1>Good</h1>
+          <p style="height: 100px; background: #eee">wode test</p>
+          <p style="height: 100px; background: #999">
+            wode test {{ activeTab }}
+          </p>
+
+          <div>good this is default slot content.</div>
+        </div>
       </template>
     </BaseContent>
   </div>
@@ -39,20 +88,39 @@
 
 <script>
 import BaseContent from '@/components/layout/content/base.vue'
+import TableDemo from '../table/demo.vue'
+import BaseInfo from '@/components/page/baseInfo'
 
 export default {
   name: 'BaseContentDemo001',
   components: {
     BaseContent,
+    TableDemo,
+    BaseInfo,
   },
   data() {
     return {
       tabs: [
         { label: '基本信息', name: 'base' },
         { label: '详细信息', name: 'info' },
+        { label: '列表数据', name: 'list' },
         '审计日志',
       ],
       defaultTab: 'info',
+      data: {
+        username: 'codelieche',
+        nick_name: '编程列车',
+        url: 'www.codelieche.com',
+        status: true,
+        logo: 'https://www.codelieche.com/static/images/logo.svg',
+      },
+      infoColumns: [
+        { title: '用户名', key: 'username' },
+        { title: '昵称', key: 'nick_name' },
+        { title: '网站', key: 'url' },
+        { title: '状态', key: 'status', slot: 'status' },
+        { title: 'Logo', key: 'logo', slot: 'logo' },
+      ],
     }
   },
 }
