@@ -21,7 +21,7 @@
       <!-- 是否有相关操作 -->
       <!-- <div slot="tools" v-if="$slots.tools"> -->
       <template #tools>
-        <slot name="tools"></slot>
+        <slot name="tools" :activeTab="activeTab"></slot>
       </template>
       <!-- </div> -->
     </BaseContentHeader>

@@ -11,10 +11,19 @@
       </template> -->
 
       <!-- 右侧的按钮 -->
-      <div slot="tools">
-        <Button>详情</Button>
-        <Button type="primary">添加</Button>
-      </div>
+      <template v-slot:tools="{ activeTab }">
+        <div>
+          <Button>详情</Button>
+          <Button type="primary">添加</Button>
+          <Button
+            type="primary"
+            v-if="activeTab === '操作步骤'"
+            @click.stop="stepDirectionVertical = !stepDirectionVertical"
+          >
+            {{ stepDirectionVertical ? '横向' : '纵向' }}
+          </Button>
+        </div>
+      </template>
 
       <!-- Tab区域 -->
       <template v-slot:tabContent="{ activeTab: activeTab }">
@@ -66,13 +75,31 @@
             <img
               :src="data.logo"
               alt="Logo"
-              style="background: #4a90e2; padding: 30px 10px; width: 170px; border-radius: 8px;"
+              style="
+                background: #4a90e2;
+                padding: 30px 10px;
+                width: 170px;
+                border-radius: 8px;
+              "
             />
           </template>
         </BaseInfo>
 
         <div v-else>
-          <TopBar title="表单基本使用001" />
+          <TopBar title="操作步骤" />
+          <Steps
+            :current="1"
+            :direction="stepDirectionVertical ? 'vertical' : 'horizontal'"
+          >
+            <Step title="第一步" content="第一步信息"></Step>
+            <Step title="第二步" content="第二步信息"></Step>
+            <Step title="第三步" content="第三步信息"></Step>
+            <Step title="第四步">
+              <template #content>
+                <div>自定义Step Content组件</div>
+              </template>
+            </Step>
+          </Steps>
           <h1>Good</h1>
           <p style="height: 100px; background: #eee">wode test</p>
           <p style="height: 100px; background: #999">
@@ -104,7 +131,7 @@ export default {
         { label: '基本信息', name: 'base' },
         { label: '详细信息', name: 'info' },
         { label: '列表数据', name: 'list' },
-        '审计日志',
+        '操作步骤',
       ],
       defaultTab: 'info',
       data: {
@@ -121,6 +148,7 @@ export default {
         { title: '状态', key: 'status', slot: 'status' },
         { title: 'Logo', key: 'logo', slot: 'logo' },
       ],
+      stepDirectionVertical: false,
     }
   },
 }
