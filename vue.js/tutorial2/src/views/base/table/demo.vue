@@ -1,14 +1,15 @@
 <template>
-  <div class="full">
-    <TopBar title="表单基本使用003" />
+  <div>
+    <TopBar title="BaseTable示例" v-if="showTitle" />
     <BaseTable
       apiUrlPrefix="/api/v1/docs/article/list"
-      pageUrlPrefix="/base/table/003"
+      :pageUrlPrefix="$router.currentRoute.path"
       :reFreshTimes="reFreshTimes"
       :showTools="true"
       :columns="columns"
       :props="tableProps"
       :onSelectionChange="onSelectionChange"
+      :showPagination="showPaginationValue"
     >
       <template v-slot:cover="data">
         <div v-if="data.row.cover">
@@ -27,8 +28,12 @@
             <Icon type="ivu-icon ivu-icon-ios-refresh">刷新</Icon>
           </Button>
 
-          <Button @click="reFreshTimes++" type="primary">
-            <Icon type="ivu-icon ivu-icon-md-add">添加</Icon>
+          <Button
+            @click="showPaginationValue = !showPaginationValue"
+            type="primary"
+            :icon="`${showPaginationValue ? 'md-eye' : 'md-eye-off'}`"
+          >
+            {{ showPaginationValue ? '隐藏分页' : '显示分页' }}
           </Button>
         </Col>
       </template>
@@ -37,12 +42,22 @@
 </template>
 
 <script>
-import BaseTable from '@/components/page/baseTable/'
+import BaseTable from '@/components/page/baseTable'
 
 export default {
-  name: 'Table001',
+  name: 'TableDemo',
   components: {
     BaseTable,
+  },
+  props: {
+    showTitle: {
+      type: Boolean,
+      default: () => true,
+    },
+    showPagination: {
+      type: Boolean,
+      default: () => true,
+    },
   },
   data() {
     const tableProps = {
@@ -120,12 +135,21 @@ export default {
           },
         },
       ],
+      showPaginationValue: false, // 显示分页
       tableProps,
     }
   },
   methods: {
     onSelectionChange(rows) {
       console.log('我选择了:', rows)
+    },
+  },
+  watch: {
+    showPagination: {
+      handler: function (newV) {
+        this.showPaginationValue = newV
+      },
+      immediate: true,
     },
   },
 }
