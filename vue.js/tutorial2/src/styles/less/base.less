@@ -13,6 +13,10 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+html {
+  // 这样页面就不会抖动
+  overflow: hidden;
+}
 
 // icon样式
 i.danger,
@@ -42,5 +46,16 @@ a {
   -webkit-transition: color 0.3s;
   transition: color 0.3s;
   -webkit-text-decoration-skip: objects;
+}
+
+.right {
+  text-align: right;
+}
+
+.max-lines-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 

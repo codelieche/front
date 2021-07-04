@@ -216,7 +216,7 @@ export default {
       box-sizing: border-box;
       text-decoration: none;
       color: #f8f8f8;
-      &.router-link-exact-active {
+      &.router-link-exact-active, &.router-link-active {
         background-color: @nav-item-active-background;
       }
     }

@@ -105,3 +105,6 @@ api.interceptors.response.use(
 )
 
 Vue.prototype.$http = api
+
+// export default api;
+
