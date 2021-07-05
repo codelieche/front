@@ -5,19 +5,48 @@
       :showBack="false"
       :tabs="tabs"
       :defaultTab="defaultTab"
+      :message="message"
+      messageType="error"
     >
       <!-- 右侧的按钮 -->
       <div slot="tools">
         <Button>详情</Button>
-        <Button type="primary">添加</Button>
+        <Button type="primary" @click="message += 'add '">添加</Button>
+        <Button type="primary" @click="visible = true">添加标签</Button>
       </div>
 
       <!-- 默认 -->
       <template #default="{ activeTab }">
-        <TableDemo />
-        <div>
+        <TableDemo v-if="activeTab === 'info'" />
+
+        <div v-if="activeTab === 'base'">
+          <TopBar title="表单基本示例" />
+          <BaseForm
+            :data="formData"
+            :fields="formFields"
+            :visible="visible"
+            title="给资源添加标签"
+            :labelWidth="100"
+            :handleSubmit="handleSubmit"
+            :afterCloseHandle="afterCloseHandle"
+          >
+          </BaseForm>
+        </div>
+        <div v-else>
           {{ activeTab }}
         </div>
+
+        <!-- 表单对话框 -->
+        <BaseFormModal
+          :data="formData"
+          :fields="formFields"
+          :visible="visible"
+          title="添加标签"
+          :labelWidth="100"
+          :handleSubmit="handleSubmit"
+          :afterCloseHandle="afterCloseHandle"
+        >
+        </BaseFormModal>
       </template>
     </BaseContent>
   </div>
@@ -25,6 +54,8 @@
 
 <script>
 import BaseContent from '@/components/layout/content/base.vue'
+import BaseForm from '@/components/page/baseForm/baseForm.vue'
+import BaseFormModal from '@/components/page/baseForm/baseFormDialog.vue'
 
 import TableDemo from '../table/demo.vue'
 
@@ -33,8 +64,35 @@ export default {
   components: {
     BaseContent,
     TableDemo,
+    BaseForm,
+    BaseFormModal,
   },
   data() {
+    const formData = {
+      tag: 'key',
+      value: 'value',
+    }
+    const formFields = [
+      {
+        name: 'tag',
+        type: 'input',
+        label: '标签',
+        props: {
+          clearable: true,
+          placeholder: 'key',
+        },
+      },
+      {
+        name: 'value',
+        type: 'input',
+        label: '标签值',
+        rules: [{ required: true, message: '请输入标签值' }],
+        props: {
+          clearable: true,
+          placeholder: 'value',
+        },
+      },
+    ]
     return {
       tabs: [
         { label: '基本信息', name: 'base' },
@@ -42,7 +100,22 @@ export default {
         '审计日志',
       ],
       defaultTab: 'info',
+      message: '',
+      // 表单
+      formData,
+      formFields,
+      visible: false,
     }
+  },
+  methods: {
+    afterCloseHandle: function () {
+      this.visible = false
+    },
+    handleSubmit: function (data) {
+      console.log('表单提交：', data)
+      this.afterCloseHandle()
+      this.$Message.success(`Data:${JSON.stringify(data)}`)
+    },
   },
 }
 </script>

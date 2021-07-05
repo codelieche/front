@@ -9,10 +9,6 @@ var routes = [
 ]
 
 var subComponents = [
-  // Input
-  'input/001',
-  'input/002',
-
   // CheckBox
   'checkbox/001',
   'checkbox/002',
@@ -27,6 +23,10 @@ var subComponents = [
   'content/001',
   'content/002',
   'content/003',
+
+  // Form
+  'form/001',
+  'form/002',
 
   {
     path: 'custom/shape',

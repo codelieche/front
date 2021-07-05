@@ -1,6 +1,7 @@
 import { 
     Row,
     Col,
+    Alert,
     Button, 
     Card,
     Form,
@@ -24,11 +25,13 @@ import {
     Steps,
     Step,
     Message,
+    Modal,
 } from 'view-design';
 import Vue from 'vue'
 
 Vue.component('Row', Row);
 Vue.component('Col', Col);
+Vue.component('Alert', Alert);
 Vue.component('Button', Button);
 Vue.component('Card', Card);
 Vue.component('Form', Form);
@@ -51,6 +54,7 @@ Vue.component('Tabs', Tabs);
 Vue.component('TabPane', TabPane);
 Vue.component('Steps', Steps);
 Vue.component('Step', Step);
+Vue.component('Modal', Modal);
 
 
 Vue.prototype.$Message = Message

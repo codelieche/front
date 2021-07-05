@@ -16,6 +16,17 @@
   padding: 10px 20px;
   box-sizing: border-box;
 
+  .ivu-form-item {
+    .tip-text{
+      color: #9e9c9c;
+      & + .ivu-form-item-error-tip {
+        // 后续可能会注释掉
+        display: none;
+      }
+
+    }
+  }
+
   .buttons {
     // text-align: right;
     .btn-login {
@@ -33,5 +44,13 @@
         cursor: pointer;
       }
     }
+  }
+}
+
+// 对话框的表单
+.base-form-modal {
+  .ivu-modal-footer {
+    border-top: none;
+    padding: 0;
   }
 }

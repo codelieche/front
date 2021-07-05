@@ -17,7 +17,6 @@
         <slot name="title"></slot>
       </template>
       <!-- </div> -->
-
       <!-- 是否有相关操作 -->
       <!-- <div slot="tools" v-if="$slots.tools"> -->
       <template #tools>
@@ -28,11 +27,16 @@
 
     <!-- 主体内容区域 -->
     <div class="content">
+      <!-- 显示消息 -->
+      <!-- <Alert v-if="message" :type="messageType" :closable="true" show-icon>
+        {{ message }}
+      </Alert> -->
+
       <slot name="tabContent" :activeTab="activeTab"></slot>
 
       <slot name="content" :activeTab="activeTab">
-          <!-- 内容顶部左侧区域 -->
-          <slot name="default" :activeTab="activeTab"></slot>
+        <!-- 内容顶部左侧区域 -->
+        <slot name="default" :activeTab="activeTab"></slot>
       </slot>
     </div>
 
@@ -64,6 +68,15 @@ export default {
       type: Boolean,
       default: () => false,
     },
+    // message: {
+    //   // 消息内容，当消息为空的时候，不显示
+    //   type: String,
+    //   default: () => '',
+    // },
+    // messageType: {
+    //   type: String,
+    //   default: () => 'success',
+    // },
     tabs: {
       // 一般是详情页中的多个TabPan列表
       type: Array,
@@ -78,15 +91,27 @@ export default {
   // mounted() {
   //   console.log(this)
   // },
-  data(){
+  data() {
     return {
-      activeTab: ''
+      activeTab: '',
+      // currentMessage: ''
     }
   },
   methods: {
-    handleTabChange: function(value) {
+    handleTabChange: function (value) {
       this.activeTab = value
-    }
+    },
+    // onAlertClose: function(){
+    //   this.currentMessage = ''
+    // }
+  },
+  watch: {
+    // message: {
+    //   handler: function(newValue){
+    //     this.currentMessage = newValue
+    //   },
+    //   immediate: true,
+    // }
   }
 }
 </script>
