@@ -82,6 +82,7 @@ const navData = [
     children: [
       { slug: 'form/001', title: '示例001' },
       { slug: 'form/002', title: '示例002' },
+      { slug: 'form/003', title: '示例003' },
     ].map(item => {
       return {
         icon: 'el-icon-arrow-right',

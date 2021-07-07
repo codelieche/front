@@ -97,6 +97,7 @@
             :value="choice.value"
             v-for="(choice, index) in item.choices"
             :key="index"
+            :disabled="choice.disabled !== undefined ? choice.disabled : false"
           ></Option>
         </Select>
 
@@ -174,6 +175,9 @@
                 :value="choice.value"
                 v-for="(choice, index) in item2.choices"
                 :key="index"
+                :disabled="
+                  choice.disabled !== undefined ? choice.disabled : false
+                "
               ></Option>
             </Select>
 

@@ -6,7 +6,7 @@ let toogle = true
 // toogle = false
 
 const userLoginResponse = {
-  id: '@id',
+  'id|+1': 1,
   username: '@first@last',
   nick_name: '@cname',
   is_superuser: '@boolean',
@@ -15,7 +15,7 @@ const userLoginResponse = {
 }
 
 const userLoginResponse2 = {
-  id: '@uuid',
+  'id|+1': 1,
   username: '@first@last',
   nick_name: '@cname',
   is_active: '@boolean',
@@ -28,7 +28,7 @@ const userListResponse = {
   count: 1000,
   'results|10': [
     {
-      id: '@id',
+      'id|+1': 1,
       username: '@first@last',
       nick_name: '@cname',
       is_superuser: '@boolean',

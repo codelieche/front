@@ -66,22 +66,22 @@ export default {
         {
           title: '标题',
           key: 'title',
-          width: 200,
+          minWidth: 200,
           align: 'left',
           sortable: 'custom',
         },
-        { title: '用户', key: 'user', width: 150, align: 'center' },
+        { title: '用户', key: 'user', minWidth: 150, align: 'center' },
         {
           title: '添加时间',
           key: 'time_added',
-          width: 180,
+          minWidth: 180,
           align: 'center',
           sortable: 'custom',
         },
         {
           title: '更新时间',
           key: 'time_updated',
-          width: 180,
+          minWidth: 180,
           align: 'center',
           sortable: 'custom',
         },
@@ -106,7 +106,7 @@ export default {
           key: 'cover',
           slot: 'cover',
           align: 'center',
-          //   width: '160'
+          minWidth: 100,
           // render: (h, params) => {
           //   return h('span', params.row.is_superuser)
           // },
@@ -115,6 +115,7 @@ export default {
           title: '描述',
           key: 'description',
           align: 'left',
+          minWidth: 120,
           render: (h, params) => {
             return h('div', { class: 'max-lines-3' }, params.row.description)
           },

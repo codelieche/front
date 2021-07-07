@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="base-content"> -->
-  <Card shadow class="base-content">
+  <Card shadow :class="['base-content', { fixed: fixHeader }]">
     <!-- 头部区域 -->
     <BaseContentHeader
       slot="title"
@@ -54,15 +54,18 @@ export default {
   },
   props: {
     showHeader: {
-      // 是否显示头部
       type: Boolean,
       default: () => true,
-    },
+    }, // 是否显示头部
     title: {
       // 标题内容
       type: String,
       default: () => '',
     },
+    fixHeader: {
+      type: Boolean,
+      default: () => false,
+    }, // 固定头部
     showBack: {
       // 是否显示返回按钮
       type: Boolean,
@@ -112,6 +115,6 @@ export default {
     //   },
     //   immediate: true,
     // }
-  }
+  },
 }
 </script>

@@ -26,6 +26,7 @@
       :show-total="true"
       :show-sizer="true"
       :show-elevator="true"
+      :translate="true"
       @on-change="onPageChange"
       @on-page-size-change="onPageSizeChange"
       v-if="showPagination"

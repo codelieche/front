@@ -4,6 +4,7 @@
       title="内容布局示例002"
       :showBack="true"
       :tabs="tabs"
+      :fixHeader="true"
       :defaultTab="defaultTab"
     >
       <!-- <template #title>

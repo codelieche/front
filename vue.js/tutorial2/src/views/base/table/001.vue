@@ -62,16 +62,17 @@ export default {
           width: 60,
           align: 'center',
         },
-        { title: 'ID', key: 'id', sortable: true },
+        { title: 'ID', key: 'id', sortable: true, width: 75 },
         {
           title: 'Username',
           key: 'username',
           sortable: 'custom',
+          minWidth: 100,
           desc: 'desc',
         },
-        { title: '昵称', key: 'nick_name' },
-        { title: '电话', key: 'phone' },
-        { title: '邮箱', key: 'email' },
+        { title: '昵称', key: 'nick_name', minWidth: 100 },
+        { title: '电话', key: 'phone', minWidth: 100 },
+        { title: '邮箱', key: 'email', minWidth: 100 },
         {
           title: '状态',
           key: 'is_active',
@@ -82,9 +83,7 @@ export default {
             return h('div', { class: 'status' }, [
               h('i', {
                 class: `ivu-icon ivu-icon-${
-                  params.row.is_active
-                    ? 'md-checkmark check'
-                    : 'md-close close'
+                  params.row.is_active ? 'md-checkmark check' : 'md-close close'
                 }`,
               }),
             ])
@@ -94,6 +93,7 @@ export default {
           title: '管理员',
           key: 'is_superuser',
           slot: 'is_superuser',
+          minWidth: 100,
           //   render: (h, params) => {
           //     return h('span', params.row.is_superuser)
           //   },

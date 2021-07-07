@@ -15,12 +15,20 @@
       <HelloWorld :msg="message" :callback="HelloWorldCallback" />
 
       <Resizable :maxWidth="400" :minWidth="150">
-        <h1 :style="{background: '#eee'}">Resizable</h1>
+        <h1 :style="{ background: '#eee' }">Resizable</h1>
       </Resizable>
 
       <Resizable :maxWidth="400" :minWidth="150">
-        <h1 :style="{background: '#eee'}">Resizable 002</h1>
+        <h1 :style="{ background: '#eee' }">Resizable 002</h1>
       </Resizable>
+
+      <!-- Select Button Demo -->
+      <SelectButton
+        url="/api/v1/account/user/"
+        placeholder="选择用户"
+        :optionFields="optionFields"
+        :width="0"
+      />
     </div>
   </div>
 </template>
@@ -29,6 +37,7 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import Resizable from '@/components/base/resizable.vue'
+import SelectButton from '@/components/page/baseForm/selectButton.vue'
 import fetchApi from '@/api/fetchApi'
 
 export default {
@@ -36,20 +45,28 @@ export default {
   components: {
     HelloWorld,
     Resizable,
+    SelectButton,
   },
   mounted() {
     this.$store.commit('updateHeaderSlug', '/')
   },
   data() {
+    const optionFields = [
+      { target: 'value', source: 'id' },
+      { target: 'text', source: ['username', 'phone'] },
+      // { target: 'text', handleFunc: (item) => `${item.phone}-${item.username}` },
+      { target: 'disabled', handleFunc: (item) => item.id % 5 === 0 },
+    ]
     return {
       message: '你好！Vue.js',
+      optionFields,
     }
   },
   methods: {
     HelloWorldCallback() {
       console.log('callback:')
-      console.log(this.$router);
-      console.log(this.$router.currentRoute);
+      console.log(this.$router)
+      console.log(this.$router.currentRoute)
       if (this.message.indexOf('Vue') >= 0) {
         this.message = '你好！Callback'
       } else {
@@ -57,21 +74,23 @@ export default {
       }
       // 发起ajax请求
       // fetchApi.get('/api/v1/account/login')
-      fetchApi.get('/api/v1/account/login')
-        .then(response => {
+      fetchApi
+        .get('/api/v1/account/login')
+        .then((response) => {
           console.log(response.data)
         })
-          .catch(err => {
-            console.log(err)
-          })
-      
-      fetchApi.post('/api/v1/account/login', {'ddd': 'good'})
-        .then(response => {
+        .catch((err) => {
+          console.log(err)
+        })
+
+      fetchApi
+        .post('/api/v1/account/login', { ddd: 'good' })
+        .then((response) => {
           console.log(response.data)
         })
-          .catch(err => {
-            console.log(err)
-          })
+        .catch((err) => {
+          console.log(err)
+        })
     },
   },
 }

@@ -8,7 +8,7 @@ const articleListResponse = {
   count: 666,
   'results|10': [
     {
-      'id|1-1000': 10,
+      'id|+1': 1,
       title: '@ctitle(10, 20)',
       user: '@cname',
       is_active: '@boolean',

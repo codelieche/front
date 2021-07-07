@@ -27,6 +27,7 @@ var subComponents = [
   // Form
   'form/001',
   'form/002',
+  'form/003',
 
   {
     path: 'custom/shape',

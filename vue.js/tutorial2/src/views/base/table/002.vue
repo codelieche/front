@@ -57,24 +57,24 @@ export default {
           width: 60,
           align: 'center',
         },
-        { title: 'ID', key: 'id', width: 180, align: 'center', sortable: true },
+        { title: 'ID', key: 'id', width: 80, align: 'center', sortable: true },
         {
           title: 'Username',
           key: 'username',
-          width: 150,
+          minWidth: 150,
           align: 'center',
           sortable: 'custom',
         },
-        { title: '昵称', key: 'nick_name', width: 150, align: 'center' },
+        { title: '昵称', key: 'nick_name', minWidth: 150, align: 'center' },
         {
           title: '电话',
           key: 'phone',
-          width: 160,
+          minWidth: 160,
           align: 'center',
           sortable: 'custom',
         },
-        { title: '邮箱', key: 'email', width: 160, align: 'center' },
-        { title: '城市', key: 'city', width: 160, align: 'center' },
+        { title: '邮箱', key: 'email', minWidth: 160, align: 'center' },
+        { title: '城市', key: 'city', minWidth: 160, align: 'center' },
         {
           title: '状态',
           key: 'is_active',
@@ -96,7 +96,7 @@ export default {
           key: 'is_superuser',
           slot: 'is_superuser',
           align: 'center',
-          // width: '160'
+          minWidth: 160
           // render: (h, params) => {
           //   return h('span', params.row.is_superuser)
           // },

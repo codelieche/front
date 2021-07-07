@@ -31,6 +31,25 @@
     margin-top: 20px;
   }
 
+  &.fixed {
+    // 固定头部：
+    display: flex;
+    flex-direction: column;
+    .ivu-card-head {
+      height: 60px;
+    }
+    .ivu-card-body {
+      flex: 1;
+      overflow-y: auto;
+      &::-webkit-scrollbar,
+      &::-webkit-scrollbar-thumb {
+        width: 4px;
+        // background-color: #333;
+        background-color: rgba(0, 0, 0, 0.18);
+      }
+    }
+  }
+
   // 头部样式
   & > .ivu-card-head {
     padding: 0 16px;

@@ -1,6 +1,6 @@
 <template>
   <div class="full grey">
-    <BaseContent title="表单示例">
+    <BaseContent title="表单示例" :fixHeader="true">
       <BaseForm
         :fields="fields"
         title="添加用户"
