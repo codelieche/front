@@ -1,7 +1,8 @@
 <template>
   <div class="base-list">
     <Row class="tools" v-if="showTools">
-      <slot name="leftButons">
+      <!-- 默认左侧：显示搜索框，可以自定义 -->
+      <slot name="leftTools" :dataSource="dataSource">
         <Col span="12">
           <Input
             class="search primary"
@@ -14,9 +15,8 @@
           />
         </Col>
       </slot>
-      <!-- <Col span="12"> -->
-      <slot name="rightButtons" :dataSource="dataSource"></slot>
-      <!-- </Col> -->
+      <!-- 右侧的工具：推荐使用：Col span=12 -->
+      <slot name="rightTools" :dataSource="dataSource"></slot>
     </Row>
     <slot name="default" :dataSource="dataSource"></slot>
     <Page
@@ -42,11 +42,11 @@
 
 <script>
 import { getParamsFromLocationSearch } from '@/utils/urlParam.js'
-import fetchListDataMixins from '@/components/page/baseList/fetchListDataMixins'
+import setFetchListDataMixin from '@/components/page/baseList/setFetchListDataMixin'
 
 export default {
   name: 'BaseList',
-  mixins: [fetchListDataMixins],
+  mixins: [setFetchListDataMixin('.results', '.count', 200)],
   props: {
     apiUrlPrefix: String, // 获取数据的接口：/api/v1/account/group/list
     // apiUrlSuffix: String,  // 获取数据的接口追加的内容，比如： type=default
@@ -107,6 +107,7 @@ export default {
     // const apiUrl = this.getApiUrl()
     // console.log(apiUrl)
     this.apiUrl = this.getApiUrl()
+    // this.dataListPath = "results"
 
     this.fetchListData()
   },
@@ -312,18 +313,18 @@ export default {
       },
       deep: true,
     },
-    
-    $route(to, from){
+
+    $route(to, from) {
       // 监控路由变化
       // console.log('路由变化:', this.$router.currentRoute)
       // console.log(to, from)
-      if(to.path === from.path){
+      if (to.path === from.path) {
         // 更新了query咯
         this.apiUrl = this.getApiUrl()
         // console.log('更新数据：', this.apiUrl)
         this.fetchListData()
       }
-    }
+    },
   },
 }
 </script>

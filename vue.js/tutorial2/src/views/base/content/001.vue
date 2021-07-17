@@ -10,7 +10,7 @@
     >
       <!-- 右侧的按钮 -->
       <div slot="tools">
-        <Button>详情</Button>
+        <Button @click="reFreshTimes += 1">刷新</Button>
         <Button type="primary" @click="message += 'add '">添加</Button>
         <Button type="primary" @click="visible = true">添加标签</Button>
       </div>
@@ -31,6 +31,10 @@
             :afterCloseHandle="afterCloseHandle"
           >
           </BaseForm>
+          <TopBar title="详情信息" />
+          <div>
+            {{ data }}
+          </div>
         </div>
         <div v-else>
           {{ activeTab }}
@@ -56,16 +60,24 @@
 import BaseContent from '@/components/layout/content/base.vue'
 import BaseForm from '@/components/page/baseForm/baseForm.vue'
 import BaseFormModal from '@/components/page/baseForm/baseFormDialog.vue'
-
+import setFetchDetailDataMixin from '@/mixins/setFetchDetailDataMixin'
 import TableDemo from '../table/demo.vue'
 
 export default {
   name: 'BaseContentDemo001',
+  mixins: [setFetchDetailDataMixin('.', 200)],
   components: {
     BaseContent,
     TableDemo,
     BaseForm,
     BaseFormModal,
+  },
+  mounted() {
+    // setFetchDetailDataMixin需要设置获取信息
+    this.apiUrl = '/api/v1/docs/article/1'
+    // 修改详情数据的路径
+    this.detailDataPath = '.'
+    // this.detailDataPath = '.auth'
   },
   data() {
     const formData = {
