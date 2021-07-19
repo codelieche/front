@@ -10,7 +10,7 @@
  */
 import fetchApi from '@/api/fetchApi'
 
-const useFetchChoices = (url, fields, callback) => {
+const useFetchChoices = (url, fields, callback, listDataPath = null) => {
   //   console.log(url, fields, callback)
   // 先对数据进行校验
   if (!url) {
@@ -28,12 +28,27 @@ const useFetchChoices = (url, fields, callback) => {
         dataSource = responseData
       } else if (typeof responseData === 'object') {
         // 不同后端可能会不一样，字段不一样
-        const listFields = ['results', 'data']
-        for (var index in listFields) {
-          const item = listFields[index]
-          if (responseData[item] && Array.isArray(responseData[item])) {
-            dataSource = responseData[item]
-            break
+        if (!listDataPath) {
+          // listDataPath为空、null、undefined都默认从下面2个选项中获取列表数据
+          const listFields = ['results', 'data']
+          for (var index in listFields) {
+            const item = listFields[index]
+            if (responseData[item] && Array.isArray(responseData[item])) {
+              dataSource = responseData[item]
+              break
+            }
+          }
+        } else if (listDataPath && typeof listDataPath === 'string') {
+          // 通过.分割, 然后层层获取：比如：.results、.data.results、.list
+          let data = responseData
+          listDataPath.split('.').forEach(item => {
+            if (item && typeof data === 'object') {
+              data = data[item]
+            }
+          })
+          // 需要对处理后的数据做个判断
+          if (Array.isArray(data)) {
+            dataSource = data
           }
         }
       }

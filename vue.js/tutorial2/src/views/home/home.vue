@@ -22,6 +22,19 @@
         <h1 :style="{ background: '#eee' }">Resizable 002</h1>
       </Resizable>
 
+      <!-- component -->
+      <Select v-model="cType">
+        <Option
+          v-for="item in selectOptions"
+          :key="item.value"
+          :value="item.value"
+          :label="item.label"
+        >
+          {{ item.label || item.text }}
+        </Option>
+      </Select>
+      <component :is="cType" v-bind="cProps">我是Div还是P还是span</component>
+
       <!-- Select Button Demo -->
       <SelectButton
         url="/api/v1/account/user/"
@@ -29,6 +42,7 @@
         :optionFields="optionFields"
         :width="0"
       />
+      <BaseTip v-bind="tips" />
     </div>
   </div>
 </template>
@@ -39,6 +53,7 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import Resizable from '@/components/base/resizable.vue'
 import SelectButton from '@/components/page/baseForm/selectButton.vue'
 import fetchApi from '@/api/fetchApi'
+import BaseTip from '@/components/page/baseForm/baseTip.vue'
 
 export default {
   name: 'HomePage',
@@ -46,6 +61,7 @@ export default {
     HelloWorld,
     Resizable,
     SelectButton,
+    BaseTip,
   },
   mounted() {
     this.$store.commit('updateHeaderSlug', '/')
@@ -60,6 +76,52 @@ export default {
     return {
       message: '你好！Vue.js',
       optionFields,
+      selectOptions: [
+        { value: 'span', label: 'Span' },
+        { value: 'div', label: 'Div' },
+        { value: 'Resizable', label: 'Resizable' },
+        { value: 'p', label: 'P' },
+        { value: 'router-link', label: 'router-link' },
+      ],
+      cType: 'div',
+      cProps: {
+        maxWidth: 400,
+        minWidth: 150,
+        clss: 'component-test',
+        style: {
+          'background-color': '#eee',
+          padding: '10px 20px',
+        },
+        to: '/base',
+      },
+      tips: {
+        type: 'ul',
+        props: {
+          class: 'base-ul',
+          style: {
+            'list-style': 'none',
+            padding: '20px',
+            background: '#333',
+            color: '#f9f9f9',
+            marginTop: '10px',
+            marginBottom: '10px',
+          },
+        },
+        children: [
+          {
+            type: 'li',
+            children: '我是第一条数据',
+          },
+          {
+            type: 'li',
+            children: '我是第二条数据',
+          },
+          {
+            type: 'li',
+            children: '我是第三条数据',
+          },
+        ],
+      },
     }
   },
   methods: {

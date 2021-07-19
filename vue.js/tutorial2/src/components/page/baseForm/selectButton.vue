@@ -47,6 +47,7 @@ export default {
       default: () => 120,
     },
     handleValueChange: Function, // 当值变更的时候，触发变更
+    listDataPath: String, // 选项列表的路径(不同后端，api返回结构不一样)
     props: {
       // Select相关的属性配置
       type: Object,
@@ -65,7 +66,7 @@ export default {
     }
   },
   mounted() {
-    useFetchChoices(this.url, this.optionFields, this.setOptions)
+    useFetchChoices(this.url, this.optionFields, this.setOptions, this.listDataPath)
   },
   methods: {
     setOptions(options) {

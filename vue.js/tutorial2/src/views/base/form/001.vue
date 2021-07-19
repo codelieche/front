@@ -19,7 +19,10 @@
           </FormItem>
           <!-- 登录按钮 -->
           <FormItem>
-            <Button type="primary" @click="handleFormSubmit('demo01')" style="width: 100%"
+            <Button
+              type="primary"
+              @click="handleFormSubmit('demo01')"
+              style="width: 100%"
               >登录</Button
             >
           </FormItem>
@@ -117,13 +120,22 @@ export default {
           clearable: true,
           placeholder: '用户名',
         },
+        // tips: {
+        //   type: 'p',
+        //   props: {
+        //     style: {
+        //       color: '#999',
+        //     },
+        //   },
+        //   children: '请输入用户名',
+        // },
       },
       {
         name: 'password',
         type: 'input',
         label: '密码',
         rules: [{ required: true, message: '请输入密码' }],
-        tipText: '密码长度必须是8位以上',
+        tips: '密码长度必须是8位以上',
         props: {
           // clearable: true,
           type: 'password',
@@ -143,7 +155,7 @@ export default {
     }
   },
   methods: {
-    handleSubmit: function(data){
+    handleSubmit: function (data) {
       this.$Message.success(JSON.stringify(data))
     },
     handleFormSubmit: function (name) {

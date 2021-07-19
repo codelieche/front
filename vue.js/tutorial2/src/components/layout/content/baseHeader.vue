@@ -27,6 +27,7 @@
         v-for="(item, index) in tabs"
         :label="typeof item === 'object' ? item.label : item"
         :name="typeof item === 'object' ? item.name : item"
+        :disabled="typeof item === 'object' ? item.disabled : false"
         :key="index"
       >
       </TabPane>

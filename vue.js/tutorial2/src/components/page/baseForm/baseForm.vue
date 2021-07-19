@@ -186,7 +186,25 @@
             </el-button>
           </span>
         </div>
-        <span class="tip-text" v-if="item.tipText">{{ item.tipText }}</span>
+        <!-- 提示信息 -->
+        <slot name="tips" v-if="item.tips">
+          <p class="tip-text" v-if="typeof item.tips === 'string'">{{
+            item.tips
+          }}</p>
+          <BaseTip
+            v-else-if="typeof item.tips === 'object'"
+            v-bind="item.tips"
+          />
+          <slot v-else-if="Array.isArray(item.tips)">
+            <BaseTip
+              v-for="(item, index) in children"
+              :key="index"
+              :type="item.type"
+              :props="item.props"
+              :children="item.children"
+            />
+          </slot>
+        </slot>
       </slot>
     </FormItem>
 
@@ -217,8 +235,12 @@
 /**
  * 注意事项：传递data的时候，如果fields中有列表值的，一定记得传递
  */
+import BaseTip from './baseTip.vue'
 export default {
   name: 'BaseForm',
+  components: {
+    BaseTip,
+  },
   props: {
     name: String, // 表格的名字
     fields: {
