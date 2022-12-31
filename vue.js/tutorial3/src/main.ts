@@ -4,6 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import { useElementPlugins } from './plugins/element'
 import './styles/main.less'
+
 import { stateSymbol, createState } from './store/headerSlug'
 
 

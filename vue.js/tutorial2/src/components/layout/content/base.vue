@@ -60,7 +60,7 @@ export default {
     title: {
       // 标题内容
       type: String,
-      default: () => '',
+      default: () => '标题',
     },
     fixHeader: {
       type: Boolean,
